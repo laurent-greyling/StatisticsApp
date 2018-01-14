@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatisticsApp.Android", "StatisticsApp\StatisticsApp.Android\StatisticsApp.Android.csproj", "{07A4D667-A023-432D-9C36-D78805A7946D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "StatisticsApp", "StatisticsApp\StatisticsApp\StatisticsApp.shproj", "{5F603724-A69A-40C6-A83C-892C63EE6272}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		StatisticsApp\StatisticsApp\StatisticsApp.projitems*{07a4d667-a023-432d-9c36-d78805a7946d}*SharedItemsImports = 4
+		StatisticsApp\StatisticsApp\StatisticsApp.projitems*{5f603724-a69a-40c6-a83c-892c63ee6272}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07A4D667-A023-432D-9C36-D78805A7946D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A4D667-A023-432D-9C36-D78805A7946D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A4D667-A023-432D-9C36-D78805A7946D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{07A4D667-A023-432D-9C36-D78805A7946D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A4D667-A023-432D-9C36-D78805A7946D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A4D667-A023-432D-9C36-D78805A7946D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {37B71632-4187-4582-9DE2-EC49F48F294A}
+	EndGlobalSection
+EndGlobal
