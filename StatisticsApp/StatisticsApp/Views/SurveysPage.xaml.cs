@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using StatisticsApp.Helpers;
 using StatisticsApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +22,6 @@ namespace StatisticsApp.Views
 		{
 			InitializeComponent ();
             GetSurveys(token, serverUrl);
-
             BindingContext = this;
         }
 
@@ -29,29 +30,37 @@ namespace StatisticsApp.Views
             try
             {
                 var url = $"{serverUrl}/v1/Surveys";
-                var request = WebRequest.Create(new Uri(url));
-                request.ContentType = "application/json";
-                request.Method = "GET";
-                request.Timeout = 15000;
-                request.Headers.Add("Authorization", $"Basic {token.AuthenticationToken}");
+                var request = new RestApi().Get(url, token);
 
                 using (WebResponse response = request.GetResponse())
                 {
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         var content = reader.ReadToEnd();
-                        Surveys = JsonConvert.DeserializeObject<ObservableCollection<SurveyDetails>>(content);                 
+                        Surveys = JsonConvert.DeserializeObject<ObservableCollection<SurveyDetails>>(content);
+                        Surveys.OrderByDescending(x => x.SurveyName);
                     }
                 }
 
-                foreach (var item in Surveys)
+                var removeSurvey = new List<SurveyDetails>();
+
+                foreach (var item in Surveys.ToList())
                 {
+                    var status = FieldWorkStatus(token, serverUrl, item.SurveyId);
+                    if (status == FieldworkStatus.UnderConstruction)
+                    {
+                        Surveys.Remove(item);
+                        continue;
+                    }
+
                     item.Icon = "smartphone.png";
 
                     if (item.SurveyType == "OnlineBasic")
                     {
                         item.Icon = "analytics.png";
                     }
+
+                    item.SuccessFulCount = $"{CompletedCount(token, serverUrl, item.SurveyId)}";
                 }
             }
             catch (Exception e)
@@ -59,5 +68,48 @@ namespace StatisticsApp.Views
                 var t = e;
             }
         }
-	}
+
+        private string CompletedCount(AccessToken token, string serverUrl, string surveyId)
+        {
+            try
+            {
+                var url = $"{serverUrl}/v1/Surveys/{surveyId}/Counts";
+                var request = new RestApi().Get(url, token);
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        var content = reader.ReadToEnd();
+                        var surveyCounts = JsonConvert.DeserializeObject<SurveyCountsModel>(content);
+                        return surveyCounts.SuccessfulCount.ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return "0";
+            }
+        }
+
+        private FieldworkStatus FieldWorkStatus(AccessToken token, string serverUrl, string surveyId)
+        {
+            try
+            {
+                var url = $"{serverUrl}/v1/Surveys/{surveyId}/Fieldwork/Status";
+                var request = new RestApi().Get(url, token);
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        return (FieldworkStatus) int.Parse(reader.ReadToEnd());
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return FieldworkStatus.UnderConstruction;
+            }
+        }
+    }
 }

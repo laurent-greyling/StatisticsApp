@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using StatisticsApp.Helpers;
 using StatisticsApp.Models;
 using System;
 using System.IO;
@@ -33,10 +34,7 @@ namespace StatisticsApp.Views
                 });
 
                 var url = $"{ServerUrl}/v1/SignIn";
-                var request = WebRequest.Create(new Uri(url));
-                request.ContentType = "application/json";                
-                request.Method = "POST";
-                request.Timeout = 15000;
+                var request = new RestApi().Post(url);
 
                 using (var writer = new StreamWriter(request.GetRequestStream()))
                 {

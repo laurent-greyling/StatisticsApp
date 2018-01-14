@@ -11,5 +11,6 @@
         public string InterviewerInstruction { get; set; }
 
         public string Icon { get; set; }
+        public string SuccessFulCount { get; set; }
     }
 }

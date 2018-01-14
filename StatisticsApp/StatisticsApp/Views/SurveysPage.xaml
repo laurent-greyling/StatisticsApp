@@ -18,6 +18,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.Column="0" Source="{Binding Icon}"/>
                                     <Label Grid.Column="1" Text="{Binding SurveyName}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Grid.Column="2" Text="{Binding SuccessFulCount}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" FontSize="Medium"/>
                                 </Grid>                                
                             </StackLayout>
                         </ViewCell>
