@@ -40,7 +40,7 @@ namespace StatisticsApp.Views
                 {
                     writer.Write(data);
                     writer.Flush();
-                }                
+                }
 
                 using (WebResponse response = request.GetResponse())
                 {
@@ -56,12 +56,12 @@ namespace StatisticsApp.Views
                     throw new Exception();
                 }
 
-                await Navigation.PushAsync(new SurveysPage(AccessToken, ServerUrl));
+                await Navigation.PushAsync(new ScreenLoadingPage(AccessToken, ServerUrl));
             }
             catch (Exception)
             {
                 await DisplayAlert("Access Denied", "User Name or Password is Incorrect", "OK");
-            }
+            };
         }
 
         private void OnPickerSelectedIndexChanged(object sender, EventArgs e)
@@ -74,22 +74,22 @@ namespace StatisticsApp.Views
                 switch (picker.Items[selectedIndex])
                 {
                     case "RC":
-                        ServerUrl = "https://rc.com";
+                        ServerUrl = "https://rc-.com";
                         break;
                     case "Blue":
-                        ServerUrl = "https://blue.com";
+                        ServerUrl = "https://blue-.com";
                         break;
                     case "Red":
-                        ServerUrl = "https://red.com";
+                        ServerUrl = "https://red-.com";
                         break;
                     case "Orange":
-                        ServerUrl = "https://orange.com";
+                        ServerUrl = "https://orange-.com";
                         break;
                     case "White":
-                        ServerUrl = "https://white.com";
+                        ServerUrl = "https://white-.com";
                         break;
                     case "Yellow":
-                        ServerUrl = "https://yellow.com";
+                        ServerUrl = "https://yellow-.com";
                         break;
                     default:
                         break;

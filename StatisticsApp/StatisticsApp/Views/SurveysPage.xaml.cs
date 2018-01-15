@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using StatisticsApp.Helpers;
 using StatisticsApp.Models;
 using System;
@@ -17,11 +16,13 @@ namespace StatisticsApp.Views
 	public partial class SurveysPage : ContentPage
 	{
         public ObservableCollection<SurveyDetails> Surveys { get; set; }
-        
-        public SurveysPage (AccessToken token, string serverUrl)
-		{
-			InitializeComponent ();
+
+        public SurveysPage(AccessToken token, string serverUrl)
+        {
+            InitializeComponent();
+
             GetSurveys(token, serverUrl);
+
             BindingContext = this;
         }
 
@@ -62,10 +63,11 @@ namespace StatisticsApp.Views
 
                     item.SuccessFulCount = $"{CompletedCount(token, serverUrl, item.SurveyId)}";
                 }
+
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                var t = e;
+                DisplayAlert("No Surveys", "Could not retrieve survey information", "OK");
             }
         }
 
