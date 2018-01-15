@@ -8,6 +8,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Spacing="10" Padding="10">
+            <ActivityIndicator x:Name="progressx" IsRunning="False" IsVisible="False" HorizontalOptions="CenterAndExpand"/>
             <Frame VerticalOptions="CenterAndExpand">
                 <StackLayout Padding="5,5,5,5">
                     <Label Text="User Name" FontSize="Medium" />

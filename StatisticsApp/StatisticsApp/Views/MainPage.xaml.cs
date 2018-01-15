@@ -26,41 +26,52 @@ namespace StatisticsApp.Views
         {
             try
             {
-                var data = JsonConvert.SerializeObject(new SignInModel
+                progressx.IsVisible = true;
+                progressx.IsRunning = true;
+
+                await Task.Run(() =>
                 {
-                    UserName = UserName.Text,
-                    Domain = Domain.Text,
-                    Password = Password.Text
+                    var data = JsonConvert.SerializeObject(new SignInModel
+                    {
+                        UserName = UserName.Text,
+                        Domain = Domain.Text,
+                        Password = Password.Text
+                    });
+
+                    var url = $"{ServerUrl}/v1/SignIn";
+                    var request = new RestApi().Post(url);
+
+                    using (var writer = new StreamWriter(request.GetRequestStream()))
+                    {
+                        writer.Write(data);
+                        writer.Flush();
+                    }
+
+                    using (WebResponse response = request.GetResponse())
+                    {
+                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                        {
+                            var content = reader.ReadToEnd();
+                            AccessToken = JsonConvert.DeserializeObject<AccessToken>(content);
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(AccessToken.AuthenticationToken))
+                    {
+                        throw new Exception();
+                    }
                 });
 
-                var url = $"{ServerUrl}/v1/SignIn";
-                var request = new RestApi().Post(url);
-
-                using (var writer = new StreamWriter(request.GetRequestStream()))
-                {
-                    writer.Write(data);
-                    writer.Flush();
-                }
-
-                using (WebResponse response = request.GetResponse())
-                {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        var content = reader.ReadToEnd();
-                        AccessToken = JsonConvert.DeserializeObject<AccessToken>(content);
-                    }
-                }
-
-                if (string.IsNullOrEmpty(AccessToken.AuthenticationToken))
-                {
-                    throw new Exception();
-                }
-
-                await Navigation.PushAsync(new ScreenLoadingPage(AccessToken, ServerUrl));
+                await Navigation.PushAsync(new SurveysPage(AccessToken, ServerUrl), true);
             }
             catch (Exception)
             {
                 await DisplayAlert("Access Denied", "User Name or Password is Incorrect", "OK");
+            }
+            finally
+            {
+                progressx.IsVisible = false;
+                progressx.IsRunning = false;
             };
         }
 

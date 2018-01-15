@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,16 +17,15 @@ namespace StatisticsApp.Views
 	public partial class SurveysPage : ContentPage
 	{
         public ObservableCollection<SurveyDetails> Surveys { get; set; }
-
+        
         public SurveysPage(AccessToken token, string serverUrl)
         {
             InitializeComponent();
-
             GetSurveys(token, serverUrl);
 
             BindingContext = this;
         }
-
+        
         private void GetSurveys(AccessToken token, string serverUrl)
         {
             try
@@ -112,6 +112,17 @@ namespace StatisticsApp.Views
             {
                 return FieldworkStatus.UnderConstruction;
             }
+        }
+
+        private async Task Show_Options(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item == null)
+                return;
+
+            var surveyDetails = e.Item as SurveyDetails;
+            
+            var action = await DisplayActionSheet($"{surveyDetails.SurveyName}", "Cancel", null, "Stats", "Location", "Survey");
+                        
         }
     }
 }

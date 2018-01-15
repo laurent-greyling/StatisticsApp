@@ -5,7 +5,7 @@
              Title="Surveys">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding Surveys}" RowHeight="50">
+            <ListView ItemsSource="{Binding Surveys}" RowHeight="50" ItemTapped="Show_Options">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
