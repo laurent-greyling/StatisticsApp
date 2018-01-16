@@ -19,7 +19,8 @@ namespace StatisticsApp.Views
 
         public MainPage ()
 		{
-			InitializeComponent ();
+            NavigationPage.SetHasNavigationBar(this, false);
+            InitializeComponent ();
         }
 
         private async Task SignIn()
@@ -28,6 +29,8 @@ namespace StatisticsApp.Views
             {
                 progressx.IsVisible = true;
                 progressx.IsRunning = true;
+                signIn.IsVisible = false;
+                signIn.IsEnabled = false;
 
                 await Task.Run(() =>
                 {
@@ -72,6 +75,8 @@ namespace StatisticsApp.Views
             {
                 progressx.IsVisible = false;
                 progressx.IsRunning = false;
+                signIn.IsVisible = true;
+                signIn.IsEnabled = true;
             };
         }
 

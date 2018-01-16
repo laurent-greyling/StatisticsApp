@@ -13,25 +13,29 @@ using Xamarin.Forms.Xaml;
 
 namespace StatisticsApp.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SurveysPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SurveysPage : ContentPage
+    {
         public ObservableCollection<SurveyDetails> Surveys { get; set; }
-        
+        private string ServerUrl { get; set; }
+        private AccessToken Token { get; set; }
+
         public SurveysPage(AccessToken token, string serverUrl)
         {
             InitializeComponent();
-            GetSurveys(token, serverUrl);
+            ServerUrl = serverUrl;
+            Token = token;
+            GetSurveys();
 
             BindingContext = this;
         }
         
-        private void GetSurveys(AccessToken token, string serverUrl)
+        private void GetSurveys()
         {
             try
             {
-                var url = $"{serverUrl}/v1/Surveys";
-                var request = new RestApi().Get(url, token);
+                var url = $"{ServerUrl}/v1/Surveys";
+                var request = new RestApi().Get(url, Token);
 
                 using (WebResponse response = request.GetResponse())
                 {
@@ -47,7 +51,7 @@ namespace StatisticsApp.Views
 
                 foreach (var item in Surveys.ToList())
                 {
-                    var status = FieldWorkStatus(token, serverUrl, item.SurveyId);
+                    var status = FieldWorkStatus(item.SurveyId);
                     if (status == FieldworkStatus.UnderConstruction)
                     {
                         Surveys.Remove(item);
@@ -61,7 +65,7 @@ namespace StatisticsApp.Views
                         item.Icon = "analytics.png";
                     }
 
-                    item.SuccessFulCount = $"{CompletedCount(token, serverUrl, item.SurveyId)}";
+                    item.SuccessFulCount = $"{CompletedCount(item.SurveyId)}";
                 }
 
             }
@@ -71,12 +75,12 @@ namespace StatisticsApp.Views
             }
         }
 
-        private string CompletedCount(AccessToken token, string serverUrl, string surveyId)
+        private string CompletedCount(string surveyId)
         {
             try
             {
-                var url = $"{serverUrl}/v1/Surveys/{surveyId}/Counts";
-                var request = new RestApi().Get(url, token);
+                var url = $"{ServerUrl}/v1/Surveys/{surveyId}/Counts";
+                var request = new RestApi().Get(url, Token);
 
                 using (WebResponse response = request.GetResponse())
                 {
@@ -94,12 +98,12 @@ namespace StatisticsApp.Views
             }
         }
 
-        private FieldworkStatus FieldWorkStatus(AccessToken token, string serverUrl, string surveyId)
+        private FieldworkStatus FieldWorkStatus(string surveyId)
         {
             try
             {
-                var url = $"{serverUrl}/v1/Surveys/{surveyId}/Fieldwork/Status";
-                var request = new RestApi().Get(url, token);
+                var url = $"{ServerUrl}/v1/Surveys/{surveyId}/Fieldwork/Status";
+                var request = new RestApi().Get(url, Token);
                 using (WebResponse response = request.GetResponse())
                 {
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
@@ -121,8 +125,21 @@ namespace StatisticsApp.Views
 
             var surveyDetails = e.Item as SurveyDetails;
             
-            var action = await DisplayActionSheet($"{surveyDetails.SurveyName}", "Cancel", null, "Stats", "Location", "Survey");
-                        
+            var action = await DisplayActionSheet($"{surveyDetails.SurveyName}", "Cancel", null, "Survey Statistics", "Interview Quality");
+
+            switch (action)
+            {
+                case "Interview Quality":
+                    await Navigation.PushAsync(new InterviewQualityPage(Token, ServerUrl, surveyDetails.SurveyId));
+                    break;
+                case "Survey Statistics":
+                    //navigate to stats page when implemented
+                    break;
+                default:
+                    break;
+            }
+
+
         }
     }
 }

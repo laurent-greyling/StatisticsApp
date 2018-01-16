@@ -18,11 +18,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RestApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AccessToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FieldworkStatus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\InterviewDetailsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\InterviewQuality.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\QuotaLevel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SignInModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyCountsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveysModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InterviewQualityPage.xaml.cs">
+      <DependentUpon>InterviewQualityPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -44,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SurveysPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\InterviewQualityPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

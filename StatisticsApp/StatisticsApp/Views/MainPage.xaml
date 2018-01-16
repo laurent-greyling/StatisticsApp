@@ -1,35 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StatisticsApp.Views.MainPage"
-             Title="Nfield Stats">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sign In" Clicked="SignIn" />
-    </ContentPage.ToolbarItems>
+             x:Class="StatisticsApp.Views.MainPage">
     <ContentPage.Content>
         <StackLayout Spacing="10" Padding="10">
-            <ActivityIndicator x:Name="progressx" IsRunning="False" IsVisible="False" HorizontalOptions="CenterAndExpand"/>
-            <Frame VerticalOptions="CenterAndExpand">
-                <StackLayout Padding="5,5,5,5">
-                    <Label Text="User Name" FontSize="Medium" />
-                    <Entry x:Name="UserName" />
-                    <Label Text="Domain" FontSize="Medium" />
-                    <Entry x:Name="Domain" />
-                    <Label Text="Password" FontSize="Medium" />
-                    <Entry x:Name="Password" IsPassword="True" />
-                    <Label Text="Server" FontSize="Medium"/>
-                    <Picker x:Name="SelectedServer" SelectedIndexChanged="OnPickerSelectedIndexChanged" HorizontalOptions="FillAndExpand">
-                        <Picker.Items>
-                            <x:String>RC</x:String>
-                            <x:String>Blue</x:String>
-                            <x:String>Red</x:String>
-                            <x:String>Orange</x:String>
-                            <x:String>White</x:String>
-                            <x:String>Yellow</x:String>
-                        </Picker.Items>
-                    </Picker>
-                </StackLayout>
-            </Frame>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>                
+                <Image Grid.Row="1" Source="nfieldmanager.png"/>
+                <Frame VerticalOptions="CenterAndExpand" Grid.Row="2">
+                    <StackLayout Padding="5,5,5,5">
+                        <Label Text="User Name" FontSize="Medium" />
+                        <Entry x:Name="UserName" />
+                        <Label Text="Domain" FontSize="Medium" />
+                        <Entry x:Name="Domain" />
+                        <Label Text="Password" FontSize="Medium" />
+                        <Entry x:Name="Password" IsPassword="True" />
+                        <Label Text="Server" FontSize="Medium"/>
+                        <Picker x:Name="SelectedServer" SelectedIndexChanged="OnPickerSelectedIndexChanged" HorizontalOptions="FillAndExpand">
+                            <Picker.Items>
+                                <x:String>RC</x:String>
+                                <x:String>Blue</x:String>
+                                <x:String>Red</x:String>
+                                <x:String>Orange</x:String>
+                                <x:String>White</x:String>
+                                <x:String>Yellow</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </Frame>
+                <ActivityIndicator Grid.Row="3" x:Name="progressx" IsRunning="False" IsVisible="False" HorizontalOptions="CenterAndExpand"/>
+                <Button Grid.Row="3" x:Name="signIn" IsVisible="True" Text="Sign In" FontSize="Medium" Clicked="SignIn" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" BackgroundColor="#02a79c"/>
+            </Grid>            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
