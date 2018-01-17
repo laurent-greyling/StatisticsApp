@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StatisticsApp.Views.SurveyStatisticsPage"
+            Title="{Binding SurveyName}" 
+            BarBackgroundColor="#02a79c"
+            BarTextColor="White">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_share_white_24dp.png" Clicked="Share" />
+    </ContentPage.ToolbarItems>
+    <!--Pages can be added as references or inline-->
+  <ContentPage Title="Statistics"/>
+  <ContentPage Title="Quota" />
+</TabbedPage>

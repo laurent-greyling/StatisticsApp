@@ -12,10 +12,15 @@ namespace StatisticsApp.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class InterviewQualityPage : ContentPage
 	{
-		public InterviewQualityPage (AccessToken token, string serverUrl, string surveyId)
+        public string SurveyName { get; set; }
+
+        public InterviewQualityPage (AccessToken token, string serverUrl, SurveyDetails surveyDetails)
 		{
 			InitializeComponent ();
-		}
+            SurveyName = surveyDetails.SurveyName;
+
+            BindingContext = this;
+        }
 
         private void GetSurveyQuality(AccessToken token, string serverUrl, string surveyId)
         {
@@ -36,5 +41,10 @@ namespace StatisticsApp.Views
                 //return FieldworkStatus.UnderConstruction;
             }
         }
-	}
+
+        private void Share(object sender, EventArgs e)
+        {
+            //Do something here
+        }
+    }
 }

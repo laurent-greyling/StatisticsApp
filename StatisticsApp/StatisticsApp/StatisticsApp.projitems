@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SignInModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyCountsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyPublicIdModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveysModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\InterviewQualityPage.xaml.cs">
       <DependentUpon>InterviewQualityPage.xaml</DependentUpon>
@@ -33,8 +34,16 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SurveyPreviewPage.xaml.cs">
+      <DependentUpon>SurveyPreviewPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\SurveysPage.xaml.cs">
       <DependentUpon>SurveysPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SurveyStatisticsPage.xaml.cs">
+      <DependentUpon>SurveyStatisticsPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -56,6 +65,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\InterviewQualityPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SurveyStatisticsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SurveyPreviewPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

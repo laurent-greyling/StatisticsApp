@@ -124,16 +124,25 @@ namespace StatisticsApp.Views
                 return;
 
             var surveyDetails = e.Item as SurveyDetails;
-            
-            var action = await DisplayActionSheet($"{surveyDetails.SurveyName}", "Cancel", null, "Survey Statistics", "Interview Quality");
+
+            var quality = string.Empty;
+            if (surveyDetails.SurveyType != "OnlineBasic")
+            {
+                quality = "Interview Quality";
+            }
+
+            var action = await DisplayActionSheet($"{surveyDetails.SurveyName}", "Cancel", null, "Survey Preview", "Survey Statistics", $"{quality}");
 
             switch (action)
             {
                 case "Interview Quality":
-                    await Navigation.PushAsync(new InterviewQualityPage(Token, ServerUrl, surveyDetails.SurveyId));
+                    await Navigation.PushAsync(new InterviewQualityPage(Token, ServerUrl, surveyDetails));
                     break;
                 case "Survey Statistics":
-                    //navigate to stats page when implemented
+                    await Navigation.PushAsync(new SurveyStatisticsPage(Token, ServerUrl, surveyDetails));
+                    break;
+                case "Survey Preview":
+                    await Navigation.PushAsync(new SurveyPreviewPage(Token, ServerUrl, surveyDetails));
                     break;
                 default:
                     break;

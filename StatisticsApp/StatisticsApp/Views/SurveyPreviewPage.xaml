@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StatisticsApp.Views.SurveyPreviewPage"
+             Title="{Binding SurveyName}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_share_white_24dp.png" Clicked="Share" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ActivityIndicator HorizontalOptions="FillAndExpand" x:Name="progressx" HeightRequest="60" IsRunning="True" IsVisible="True"/>
+                <WebView x:Name="webview" 
+                             VerticalOptions="FillAndExpand" 
+                             HorizontalOptions="FillAndExpand"
+                             Navigating="WebView_OnNavigating"
+                             Navigated="WebView_OnNavigated"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
