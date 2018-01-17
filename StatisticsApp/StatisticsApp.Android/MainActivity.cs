@@ -18,7 +18,7 @@ namespace StatisticsApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            ScreenshotManager.Activity = this;
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }

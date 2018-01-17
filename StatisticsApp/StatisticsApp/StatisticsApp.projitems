@@ -16,6 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RestApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IScreenshotManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AccessToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FieldworkStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\InterviewDetailsModel.cs" />

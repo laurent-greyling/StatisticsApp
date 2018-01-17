@@ -90,7 +90,7 @@ namespace StatisticsApp.Views
                 switch (picker.Items[selectedIndex])
                 {
                     case "RC":
-                        ServerUrl = "https://rc-.com";
+                        ServerUrl = "https://rc-api.niposoftware-dev.com";
                         break;
                     case "Blue":
                         ServerUrl = "https://blue-.com";

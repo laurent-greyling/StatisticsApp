@@ -2,6 +2,12 @@
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Threading.Tasks;
+using StatisticsApp.Interfaces;
+using System.IO;
+using System.Net.Mail;
+using Android.Content;
+using Java.IO;
 
 namespace StatisticsApp.Views
 {
@@ -18,9 +24,29 @@ namespace StatisticsApp.Views
             BindingContext = this;
         }
 
-        private void Share(object sender, EventArgs e)
+        private async Task Share(object sender, EventArgs e)
         {
-            //Do something here
+            try
+            {
+                var screenshotDependency = DependencyService.Get<IScreenshotManager>();
+                if (screenshotDependency != null)
+                {
+                    var screenshotBytes = await screenshotDependency.CaptureAsync();
+
+                    var dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim);
+                    var pictures = dir.AbsolutePath;
+                    string filePath = Path.Combine(pictures, $"{SurveyName}-{Guid.NewGuid()}.jpg");
+                    System.IO.File.WriteAllBytes(filePath, screenshotBytes);
+                    
+                    //Device.OpenUri(new Uri("mailto:?attachment='"+ filePath + "'"));
+                }
+            }
+            catch (Exception w)
+            {
+                var ex = w;
+                throw;
+            }
+              
         }
     }
 }
