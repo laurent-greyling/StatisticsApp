@@ -4,6 +4,6 @@ namespace StatisticsApp.Interfaces
 {
     public interface IScreenshotManager
     {
-        Task<byte[]> CaptureAsync();
+        byte[] CaptureAsync();
     }
 }

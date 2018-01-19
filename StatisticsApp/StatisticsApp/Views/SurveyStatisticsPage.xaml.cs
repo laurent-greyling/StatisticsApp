@@ -31,13 +31,13 @@ namespace StatisticsApp.Views
                 var screenshotDependency = DependencyService.Get<IScreenshotManager>();
                 if (screenshotDependency != null)
                 {
-                    var screenshotBytes = await screenshotDependency.CaptureAsync();
+                    var screenshotBytes = screenshotDependency.CaptureAsync();
 
                     var dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim);
                     var pictures = dir.AbsolutePath;
-                    string filePath = Path.Combine(pictures, $"{SurveyName}-{Guid.NewGuid()}.jpg");
+                    string filePath = Path.Combine(pictures, $"{SurveyName}-{Guid.NewGuid()}.png");
                     System.IO.File.WriteAllBytes(filePath, screenshotBytes);
-                    
+
                     //Device.OpenUri(new Uri("mailto:?attachment='"+ filePath + "'"));
                 }
             }

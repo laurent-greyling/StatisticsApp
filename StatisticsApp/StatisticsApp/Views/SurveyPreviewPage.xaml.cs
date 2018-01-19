@@ -16,13 +16,13 @@ namespace StatisticsApp.Views
 	public partial class SurveyPreviewPage : ContentPage
 	{
         public string SurveyName { get; set; }
+        public string SurveyTestUri { get; set; }
 
         public SurveyPreviewPage(AccessToken token, string serverUrl, SurveyDetails surveyDetails)
 		{
 			InitializeComponent ();
             SurveyName = surveyDetails.SurveyName;
-
-            webview.Source = SurveyTestUrl(token, serverUrl, surveyDetails.SurveyId);
+            SurveyTestUri = SurveyTestUrl(token, serverUrl, surveyDetails.SurveyId);
 
             BindingContext = this;
 		}
@@ -56,7 +56,7 @@ namespace StatisticsApp.Views
 
         private void Share(object sender, EventArgs e)
         {
-            //Do something here
+            Device.OpenUri(new Uri($"mailto:?subject=Test%20Survey%20Preview&body={SurveyTestUri}"));
         }
 
         private void WebView_OnNavigating()

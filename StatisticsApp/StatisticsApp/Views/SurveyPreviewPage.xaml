@@ -10,7 +10,7 @@
         <ScrollView>
             <StackLayout>
                 <ActivityIndicator HorizontalOptions="FillAndExpand" x:Name="progressx" HeightRequest="60" IsRunning="True" IsVisible="True"/>
-                <WebView x:Name="webview" 
+                <WebView x:Name="webview" Source="{Binding SurveyTestUri}"
                              VerticalOptions="FillAndExpand" 
                              HorizontalOptions="FillAndExpand"
                              Navigating="WebView_OnNavigating"
