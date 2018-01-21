@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace StatisticsApp.Interfaces
 {
     public interface IScreenshotManager
     {
-        byte[] CaptureAsync();
+        Task<ImageSource> CaptureAsync();
     }
 }

@@ -1,0 +1,17 @@
+﻿//var screenshotDependency = DependencyService.Get<IScreenshotManager>();
+                //if (screenshotDependency != null)
+                //{
+                //    var t = new Image();
+                //    var imageSource = await screenshotDependency.CaptureAsync();
+                //    t.BindingContext = imageSource.BindingContext;
+                //    //var dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim);
+                //    //var pictures = dir.AbsolutePath;
+                //    //var filePath = System.IO.Path.Combine(pictures, $"{SurveyName}-{Guid.NewGuid()}.png");
+
+
+                //    //System.IO.File.WriteAllBytes(filePath, )
+
+                //    //System.IO.File.WriteAllBytes(filePath, screenshotBytes);
+
+                //    Device.OpenUri(new Uri($"mailto:?attachment={imageSource}"));
+                //

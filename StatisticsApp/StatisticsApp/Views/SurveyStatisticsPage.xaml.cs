@@ -1,13 +1,13 @@
-﻿using StatisticsApp.Models;
+﻿using Newtonsoft.Json;
+using StatisticsApp.Helpers;
+using StatisticsApp.Models;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Threading.Tasks;
-using StatisticsApp.Interfaces;
-using System.IO;
-using System.Net.Mail;
-using Android.Content;
-using Java.IO;
 
 namespace StatisticsApp.Views
 {
@@ -15,31 +15,51 @@ namespace StatisticsApp.Views
     public partial class SurveyStatisticsPage : TabbedPage
     {
         public string SurveyName { get; set; }
+        public string Success { get; set; }
+        public string ActiveLive { get; set; }
+        public string ActiveTest { get; set; }
+        public string Total { get; set; }
+
+        public string PercSuccess { get; set; }
+        public string PercDrop { get; set; }
+        public string PercScreen { get; set; }
+        public string PercReject { get; set; }
+        public string PercTotal { get; set; }
+
+        public SurveyCountsModel SurveyCounts {get;set;}        
+        private AccessToken Token { get; set; }
+        private string ServerUrl { get; set; }
+        private string SurveyId { get; set; }
+
         public SurveyStatisticsPage(AccessToken token, string serverUrl, SurveyDetails surveyDetails)
         {
             InitializeComponent();
             SurveyName = surveyDetails.SurveyName;
-             
+            Token = token;
+            ServerUrl = serverUrl;
+            SurveyId = surveyDetails.SurveyId;
+            GetCounts();
+            Success = $"{SurveyCounts.SuccessfulCount} total successful interviews";
+            ActiveLive = $"{SurveyCounts.ActiveLiveCount} active live interviews";
+            ActiveTest = $"{SurveyCounts.ActiveTestCount} active test interviews";
+            Total = (SurveyCounts.SuccessfulCount + SurveyCounts.DroppedOutCount + SurveyCounts.ScreenedOutCount + SurveyCounts.RejectedCount).ToString();
+            Percentages(int.Parse(Total));
 
             BindingContext = this;
         }
 
-        private async Task Share(object sender, EventArgs e)
+        private void Share(object sender, EventArgs e)
         {
             try
             {
-                var screenshotDependency = DependencyService.Get<IScreenshotManager>();
-                if (screenshotDependency != null)
-                {
-                    var screenshotBytes = screenshotDependency.CaptureAsync();
+                var body = $@"Please see the current status of {SurveyName}:
+Completed Interviews: {Total}
+Successful: {SurveyCounts.SuccessfulCount}
+Dropped Out: {SurveyCounts.DroppedOutCount}
+Screened Out: {SurveyCounts.ScreenedOutCount}
+Rejected: {SurveyCounts.RejectedCount}";
 
-                    var dir = Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDcim);
-                    var pictures = dir.AbsolutePath;
-                    string filePath = Path.Combine(pictures, $"{SurveyName}-{Guid.NewGuid()}.png");
-                    System.IO.File.WriteAllBytes(filePath, screenshotBytes);
-
-                    //Device.OpenUri(new Uri("mailto:?attachment='"+ filePath + "'"));
-                }
+                Device.OpenUri(new Uri($"mailto:?subject={SurveyName}%20Statistics&body={body}"));
             }
             catch (Exception w)
             {
@@ -47,6 +67,42 @@ namespace StatisticsApp.Views
                 throw;
             }
               
+        }
+
+        private void GetCounts()
+        {
+            try
+            {
+                var url = $"{ServerUrl}/v1/Surveys/{SurveyId}/Counts";
+                var request = new RestApi().Get(url, Token);
+
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        var content = reader.ReadToEnd();
+                        SurveyCounts = JsonConvert.DeserializeObject<SurveyCountsModel>(content);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                DisplayAlert("Oeps", $"No data for {SurveyName}", "Ok");
+            }            
+        }
+
+        private void Percentages(int total)
+        {
+            var successPerc = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)total)*100),1);            
+            var dropPerc = Math.Round((((decimal)SurveyCounts.DroppedOutCount / (decimal)total) * 100), 1);
+            var screenPerc = Math.Round((((decimal)SurveyCounts.ScreenedOutCount / (decimal)total) * 100), 1);
+            var rejectPerc = Math.Round((((decimal)SurveyCounts.RejectedCount / (decimal)total) * 100), 1);
+            var totalPerc = Math.Round((successPerc + dropPerc + screenPerc + rejectPerc), 1);
+            PercSuccess = $"{successPerc}%";
+            PercDrop = $"{dropPerc}%";
+            PercScreen = $"{screenPerc}%";
+            PercReject = $"{rejectPerc}%";
+            PercTotal = $"{totalPerc}%";
         }
     }
 }

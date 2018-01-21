@@ -1,15 +1,11 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 
 namespace StatisticsApp.Droid
 {
-    [Activity(Label = "StatisticsApp", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Nfield Statistics", Icon = "@drawable/barchart", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
@@ -18,7 +14,7 @@ namespace StatisticsApp.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            ScreenshotManager.Activity = this;
+            //ScreenshotManager.Activity = this;
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }

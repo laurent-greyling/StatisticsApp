@@ -5,6 +5,9 @@ using Android.Graphics;
 using StatisticsApp.Droid;
 using StatisticsApp.Interfaces;
 using Xamarin.Forms;
+using Plugin.Screenshot;
+using System.Threading.Tasks;
+using Plugin.CurrentActivity;
 
 [assembly: Dependency(typeof(ScreenshotManager))]
 namespace StatisticsApp.Droid
@@ -13,7 +16,7 @@ namespace StatisticsApp.Droid
     {
         public static Activity Activity { get; set; }
 
-        public byte[] CaptureAsync()
+        public async Task<ImageSource> CaptureAsync()
         {
             try
             {
@@ -22,20 +25,25 @@ namespace StatisticsApp.Droid
                     throw new Exception("You have to set ScreenshotManager.Activity in your Android project");
                 }
 
-                var view = Activity.Window.DecorView;
-                view.DrawingCacheEnabled = true;
+                CrossCurrentActivity.Current.Activity = Activity;
+                
+                var stream = new MemoryStream(await CrossScreenshot.Current.CaptureAsync());
 
-                Bitmap bitmap = view.GetDrawingCache(true);
+                return ImageSource.FromStream(() => stream);
+                //var view = Activity.Window.DecorView;
+                //view.DrawingCacheEnabled = true;
 
-                byte[] bitmapData;
+                //Bitmap bitmap = view.GetDrawingCache(true);
 
-                using (var stream = new MemoryStream())
-                {
-                    bitmap.Compress(Bitmap.CompressFormat.Png, 0, stream);
-                    bitmapData = stream.ToArray();
-                }
+                //byte[] bitmapData;
 
-                return bitmapData;
+                //using (var stream = new MemoryStream())
+                //{
+                //    bitmap.Compress(Bitmap.CompressFormat.Png, 0, stream);
+                //    bitmapData = stream.ToArray();
+                //}
+
+                //return bitmapData;
             }
             catch (Exception e)
             {

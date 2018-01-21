@@ -9,6 +9,57 @@
         <ToolbarItem Icon="ic_share_white_24dp.png" Clicked="Share" />
     </ContentPage.ToolbarItems>
     <!--Pages can be added as references or inline-->
-  <ContentPage Title="Statistics"/>
-  <ContentPage Title="Quota" />
+    <ContentPage Title="Statistics">
+        <ScrollView>
+            <StackLayout Padding="5,5,5,5">
+                <Frame Padding="5,5,5,5">
+                    <StackLayout>
+                        <Label Text="{Binding Success}" FontSize="Large" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding ActiveLive}" FontSize="Medium" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label Text="{Binding ActiveTest}" FontSize="Small" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Padding="5,5,5,5">
+                    <StackLayout>
+                        <Grid ColumnSpacing="0" RowSpacing="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Padding="5,5,5,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="110"/>
+                                <ColumnDefinition Width="110"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Result" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="Count" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
+                            <Label Grid.Row="0" Grid.Column="2" Text="% Of Total" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="Success" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding SurveyCounts.SuccessfulCount}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="2" Text="{Binding PercSuccess}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" Text="Dropped Out" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding SurveyCounts.DroppedOutCount}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                            <Label Grid.Row="2" Grid.Column="2" Text="{Binding PercDrop}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                            <Label Grid.Row="3" Grid.Column="0" Text="Screened Out" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="3" Grid.Column="1" Text="{Binding SurveyCounts.ScreenedOutCount}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="3" Grid.Column="2" Text="{Binding PercScreen}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="4" Grid.Column="0" Text="Rejected" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                            <Label Grid.Row="4" Grid.Column="1" Text="{Binding SurveyCounts.RejectedCount}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                            <Label Grid.Row="4" Grid.Column="2" Text="{Binding PercReject}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                            <BoxView Grid.Row="5" BackgroundColor="#02a79c" Grid.ColumnSpan="3"/>
+                            <Label Grid.Row="6" Grid.Column="0" Text="Total" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="6" Grid.Column="1" Text="{Binding Total}" FontSize="Medium" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                            <Label Grid.Row="6" Grid.Column="2" Text="{Binding PercTotal}" FontSize="Medium" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Quota" />
 </TabbedPage>
