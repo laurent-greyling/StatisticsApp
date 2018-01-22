@@ -42,8 +42,7 @@ namespace StatisticsApp.Views
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         var content = reader.ReadToEnd();
-                        Surveys = JsonConvert.DeserializeObject<ObservableCollection<SurveyDetails>>(content);
-                        Surveys.OrderByDescending(x => x.SurveyName);
+                        Surveys = JsonConvert.DeserializeObject<ObservableCollection<SurveyDetails>>(content);                        
                     }
                 }
 
@@ -67,7 +66,6 @@ namespace StatisticsApp.Views
 
                     item.SuccessFulCount = $"{CompletedCount(item.SurveyId)}";
                 }
-
             }
             catch (Exception)
             {
@@ -88,6 +86,8 @@ namespace StatisticsApp.Views
                     {
                         var content = reader.ReadToEnd();
                         var surveyCounts = JsonConvert.DeserializeObject<SurveyCountsModel>(content);
+                        if (surveyCounts.SuccessfulCount == null) return "0";
+
                         return surveyCounts.SuccessfulCount.ToString();
                     }
                 }
@@ -124,20 +124,11 @@ namespace StatisticsApp.Views
                 return;
 
             var surveyDetails = e.Item as SurveyDetails;
-
-            var quality = string.Empty;
-            if (surveyDetails.SurveyType != "OnlineBasic")
-            {
-                quality = "Interview Quality";
-            }
-
-            var action = await DisplayActionSheet($"{surveyDetails.SurveyName}", "Cancel", null, "Survey Preview", "Survey Statistics", $"{quality}");
+            
+            var action = await DisplayActionSheet($"{surveyDetails.SurveyName}", "Cancel", null, "Survey Preview", "Survey Statistics");
 
             switch (action)
             {
-                case "Interview Quality":
-                    await Navigation.PushAsync(new InterviewQualityPage(Token, ServerUrl, surveyDetails));
-                    break;
                 case "Survey Statistics":
                     await Navigation.PushAsync(new SurveyStatisticsPage(Token, ServerUrl, surveyDetails));
                     break;

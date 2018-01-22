@@ -19,12 +19,14 @@ namespace StatisticsApp.Views
         public string ActiveLive { get; set; }
         public string ActiveTest { get; set; }
         public string Total { get; set; }
-
+        public string PercOfTarget { get; set; }
         public string PercSuccess { get; set; }
         public string PercDrop { get; set; }
         public string PercScreen { get; set; }
         public string PercReject { get; set; }
         public string PercTotal { get; set; }
+
+        public bool TargetVisible { get; set; } = false;
 
         public SurveyCountsModel SurveyCounts {get;set;}        
         private AccessToken Token { get; set; }
@@ -103,6 +105,13 @@ Rejected: {SurveyCounts.RejectedCount}";
             PercScreen = $"{screenPerc}%";
             PercReject = $"{rejectPerc}%";
             PercTotal = $"{totalPerc}%";
+
+            if (SurveyCounts.QuotaCounts != null)
+            {
+                TargetVisible = true;
+                var targetPercentage = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)SurveyCounts.QuotaCounts.Target) * 100), 1);
+                PercOfTarget = $"{targetPercentage}% of Target";
+            }            
         }
     }
 }
