@@ -17,6 +17,7 @@ namespace StatisticsApp.Views
     public partial class SurveysPage : ContentPage
     {
         public ObservableCollection<SurveyDetails> Surveys { get; set; }
+
         private string ServerUrl { get; set; }
         private AccessToken Token { get; set; }
 
@@ -138,8 +139,29 @@ namespace StatisticsApp.Views
                 default:
                     break;
             }
+        }
 
+        private void Tapped_Search()
+        {
+            SearchBar.IsVisible = !SearchBar.IsVisible ? true : false;
+        }
 
+        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            SurveyList.BeginRefresh();
+
+            SurveyList.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue)
+                ? SurveyList.ItemsSource = Surveys
+                : SurveyList.ItemsSource = Surveys.Where(n => n.SurveyName.Contains(e.NewTextValue));
+
+            SurveyList.EndRefresh();
+        }
+
+        private void Surveys_Refresh(object sender, EventArgs e)
+        {
+            GetSurveys();
+            SurveyList.ItemsSource = Surveys;
+            SurveyList.EndRefresh();
         }
     }
 }
