@@ -62,7 +62,7 @@ namespace StatisticsApp.Views
                     if (string.IsNullOrEmpty(AccessToken.AuthenticationToken))
                     {
                         throw new Exception();
-                    }
+                    }                    
                 });
 
                 await Navigation.PushAsync(new SurveysPage(AccessToken, ServerUrl), true);
@@ -93,19 +93,19 @@ namespace StatisticsApp.Views
                         ServerUrl = "https://rc-api.niposoftware-dev.com";
                         break;
                     case "Blue":
-                        ServerUrl = "https://blue-.com";
+                        ServerUrl = "https://blue-api.niposoftware-dev.com";
                         break;
                     case "Red":
-                        ServerUrl = "https://red-.com";
+                        ServerUrl = "https://red-api.niposoftware-dev.com";
                         break;
                     case "Orange":
-                        ServerUrl = "https://orange-.com";
+                        ServerUrl = "https://orange-api.niposoftware-dev.com";
                         break;
                     case "White":
-                        ServerUrl = "https://white-.com";
+                        ServerUrl = "https://white-api.niposoftware-dev.com";
                         break;
                     case "Yellow":
-                        ServerUrl = "https://yellow-.com";
+                        ServerUrl = "https://yellow-api.niposoftware-dev.com";
                         break;
                     default:
                         break;

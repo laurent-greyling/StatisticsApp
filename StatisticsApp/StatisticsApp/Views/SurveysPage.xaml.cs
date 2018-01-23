@@ -148,13 +148,9 @@ namespace StatisticsApp.Views
 
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            SurveyList.BeginRefresh();
-
             SurveyList.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue)
                 ? SurveyList.ItemsSource = Surveys
                 : SurveyList.ItemsSource = Surveys.Where(n => n.SurveyName.Contains(e.NewTextValue));
-
-            SurveyList.EndRefresh();
         }
 
         private void Surveys_Refresh(object sender, EventArgs e)

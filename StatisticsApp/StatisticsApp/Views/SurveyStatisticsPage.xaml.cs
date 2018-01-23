@@ -15,9 +15,7 @@ namespace StatisticsApp.Views
     public partial class SurveyStatisticsPage : TabbedPage
     {
         public ObservableCollection<SurveyInfo> SurveyInfo { get; set; }
-        public bool TargetVisible { get; set; } = false;
-
-        public SurveyCountsModel SurveyCounts {get;set;}        
+        public SurveyCountsModel SurveyCounts { get; set; }
         private AccessToken Token { get; set; }
         private string ServerUrl { get; set; }
         private string SurveyId { get; set; }
@@ -81,14 +79,19 @@ Rejected: {SurveyCounts.RejectedCount}";
 
         private void Percentages()
         {
-            var total = (SurveyCounts.SuccessfulCount + SurveyCounts.DroppedOutCount + SurveyCounts.ScreenedOutCount + SurveyCounts.RejectedCount);
-            
-            var successPerc = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)total)*100),1);            
-            var dropPerc = Math.Round((((decimal)SurveyCounts.DroppedOutCount / (decimal)total) * 100), 1);
-            var screenPerc = Math.Round((((decimal)SurveyCounts.ScreenedOutCount / (decimal)total) * 100), 1);
-            var rejectPerc = Math.Round((((decimal)SurveyCounts.RejectedCount / (decimal)total) * 100), 1);
-            var totalPerc = Math.Round((successPerc + dropPerc + screenPerc + rejectPerc), 1);
-            SurveyInfo = new ObservableCollection<SurveyInfo>
+            try
+            {
+                var total = (SurveyCounts.SuccessfulCount
+               + SurveyCounts.DroppedOutCount
+               + SurveyCounts.ScreenedOutCount
+               + SurveyCounts.RejectedCount);
+
+                var successPerc = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)total) * 100), 1);
+                var dropPerc = Math.Round((((decimal)SurveyCounts.DroppedOutCount / (decimal)total) * 100), 1);
+                var screenPerc = Math.Round((((decimal)SurveyCounts.ScreenedOutCount / (decimal)total) * 100), 1);
+                var rejectPerc = Math.Round((((decimal)SurveyCounts.RejectedCount / (decimal)total) * 100), 1);
+                var totalPerc = Math.Round((successPerc + dropPerc + screenPerc + rejectPerc), 1);
+                SurveyInfo = new ObservableCollection<SurveyInfo>
             {
                 new SurveyInfo
                 {
@@ -96,21 +99,32 @@ Rejected: {SurveyCounts.RejectedCount}";
                     Success = $"{SurveyCounts.SuccessfulCount} total successful interviews",
                     ActiveLive = $"{SurveyCounts.ActiveLiveCount} active live interviews",
                     ActiveTest = $"{SurveyCounts.ActiveTestCount} active test interviews",
-                    Total = (SurveyCounts.SuccessfulCount + SurveyCounts.DroppedOutCount + SurveyCounts.ScreenedOutCount + SurveyCounts.RejectedCount).ToString(),
+                    Total = (SurveyCounts.SuccessfulCount
+                    + SurveyCounts.DroppedOutCount
+                    + SurveyCounts.ScreenedOutCount
+                    + SurveyCounts.RejectedCount).ToString(),
                     PercSuccess = $"{successPerc}%",
                     PercDrop = $"{dropPerc}%",
                     PercScreen = $"{screenPerc}%",
                     PercReject = $"{rejectPerc}%",
-                    PercTotal = $"{totalPerc}%"
+                    PercTotal = $"{totalPerc}%",
+                    SurveyCounts = SurveyCounts
                 }
             };
 
-            if (SurveyCounts.QuotaCounts != null)
+                if (SurveyCounts.QuotaCounts != null)
+                {
+                    SurveyInfo[0].TargetVisible = true;
+                    var targetPercentage = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)SurveyCounts.QuotaCounts.Target) * 100), 1);
+                    SurveyInfo[0].PercOfTarget = $"{targetPercentage}% of Target";
+                }
+            }
+            catch (Exception)
             {
-                TargetVisible = true;
-                var targetPercentage = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)SurveyCounts.QuotaCounts.Target) * 100), 1);
-                SurveyInfo[0].PercOfTarget = $"{targetPercentage}% of Target";
-            }            
+
+                throw;
+            }
+           
         }
 
         private void Stats_Refresh(object sender, EventArgs e)
