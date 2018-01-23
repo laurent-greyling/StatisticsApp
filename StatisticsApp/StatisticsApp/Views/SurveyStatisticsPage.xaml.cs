@@ -2,30 +2,18 @@
 using StatisticsApp.Helpers;
 using StatisticsApp.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace StatisticsApp.Views
 {
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SurveyStatisticsPage : TabbedPage
     {
-        public string SurveyName { get; set; }
-        public string Success { get; set; }
-        public string ActiveLive { get; set; }
-        public string ActiveTest { get; set; }
-        public string Total { get; set; }
-        public string PercOfTarget { get; set; }
-        public string PercSuccess { get; set; }
-        public string PercDrop { get; set; }
-        public string PercScreen { get; set; }
-        public string PercReject { get; set; }
-        public string PercTotal { get; set; }
-
+        public SurveyInfo SurveyInfo { get; set; }
         public bool TargetVisible { get; set; } = false;
 
         public SurveyCountsModel SurveyCounts {get;set;}        
@@ -36,16 +24,11 @@ namespace StatisticsApp.Views
         public SurveyStatisticsPage(AccessToken token, string serverUrl, SurveyDetails surveyDetails)
         {
             InitializeComponent();
-            SurveyName = surveyDetails.SurveyName;
             Token = token;
             ServerUrl = serverUrl;
             SurveyId = surveyDetails.SurveyId;
             GetCounts();
-            Success = $"{SurveyCounts.SuccessfulCount} total successful interviews";
-            ActiveLive = $"{SurveyCounts.ActiveLiveCount} active live interviews";
-            ActiveTest = $"{SurveyCounts.ActiveTestCount} active test interviews";
-            Total = (SurveyCounts.SuccessfulCount + SurveyCounts.DroppedOutCount + SurveyCounts.ScreenedOutCount + SurveyCounts.RejectedCount).ToString();
-            Percentages(int.Parse(Total));
+            Percentages(surveyDetails);
 
             BindingContext = this;
         }
@@ -54,14 +37,14 @@ namespace StatisticsApp.Views
         {
             try
             {
-                var body = $@"Please see the current status of {SurveyName}:
-Completed Interviews: {Total}
+                var body = $@"Please see the current status of {SurveyInfo.SurveyName}:
+Completed Interviews: {SurveyInfo.Total}
 Successful: {SurveyCounts.SuccessfulCount}
 Dropped Out: {SurveyCounts.DroppedOutCount}
 Screened Out: {SurveyCounts.ScreenedOutCount}
 Rejected: {SurveyCounts.RejectedCount}";
 
-                Device.OpenUri(new Uri($"mailto:?subject={SurveyName}%20Statistics&body={body}"));
+                Device.OpenUri(new Uri($"mailto:?subject={SurveyInfo.SurveyName}%20Statistics&body={body}"));
             }
             catch (Exception w)
             {
@@ -89,28 +72,39 @@ Rejected: {SurveyCounts.RejectedCount}";
             }
             catch (Exception)
             {
-                DisplayAlert("Oeps", $"No data for {SurveyName}", "Ok");
+                DisplayAlert("Oeps", $"No data for {SurveyInfo.SurveyName}", "Ok");
             }            
         }
 
-        private void Percentages(int total)
+        private void Percentages(SurveyDetails surveyDetails)
         {
+            var total = (SurveyCounts.SuccessfulCount + SurveyCounts.DroppedOutCount + SurveyCounts.ScreenedOutCount + SurveyCounts.RejectedCount);
+            
             var successPerc = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)total)*100),1);            
             var dropPerc = Math.Round((((decimal)SurveyCounts.DroppedOutCount / (decimal)total) * 100), 1);
             var screenPerc = Math.Round((((decimal)SurveyCounts.ScreenedOutCount / (decimal)total) * 100), 1);
             var rejectPerc = Math.Round((((decimal)SurveyCounts.RejectedCount / (decimal)total) * 100), 1);
             var totalPerc = Math.Round((successPerc + dropPerc + screenPerc + rejectPerc), 1);
-            PercSuccess = $"{successPerc}%";
-            PercDrop = $"{dropPerc}%";
-            PercScreen = $"{screenPerc}%";
-            PercReject = $"{rejectPerc}%";
-            PercTotal = $"{totalPerc}%";
+
+            SurveyInfo = new SurveyInfo
+            {
+                SurveyName = surveyDetails.SurveyName,
+                Success = $"{SurveyCounts.SuccessfulCount} total successful interviews",
+                ActiveLive = $"{SurveyCounts.ActiveLiveCount} active live interviews",
+                ActiveTest = $"{SurveyCounts.ActiveTestCount} active test interviews",
+                Total = (SurveyCounts.SuccessfulCount + SurveyCounts.DroppedOutCount + SurveyCounts.ScreenedOutCount + SurveyCounts.RejectedCount).ToString(),
+                PercSuccess = $"{successPerc}%",
+                PercDrop = $"{dropPerc}%",
+                PercScreen = $"{screenPerc}%",
+                PercReject = $"{rejectPerc}%",
+                PercTotal = $"{totalPerc}%"
+            };
 
             if (SurveyCounts.QuotaCounts != null)
             {
                 TargetVisible = true;
                 var targetPercentage = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)SurveyCounts.QuotaCounts.Target) * 100), 1);
-                PercOfTarget = $"{targetPercentage}% of Target";
+                SurveyInfo.PercOfTarget = $"{targetPercentage}% of Target";
             }            
         }
     }

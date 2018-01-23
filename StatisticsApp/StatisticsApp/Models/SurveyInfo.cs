@@ -1,0 +1,17 @@
+﻿namespace StatisticsApp.Models
+{
+    public class SurveyInfo
+    {
+        public string SurveyName { get; set; }
+        public string Success { get; set; }
+        public string ActiveLive { get; set; }
+        public string ActiveTest { get; set; }
+        public string Total { get; set; }
+        public string PercOfTarget { get; set; }
+        public string PercSuccess { get; set; }
+        public string PercDrop { get; set; }
+        public string PercScreen { get; set; }
+        public string PercReject { get; set; }
+        public string PercTotal { get; set; }
+    }
+}

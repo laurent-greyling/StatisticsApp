@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SignInModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyCountsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyDetails.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyPublicIdModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveysModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
