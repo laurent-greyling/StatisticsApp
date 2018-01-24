@@ -61,14 +61,13 @@ namespace StatisticsApp.Views
 
         private void WebView_OnNavigating()
         {
-            progressx.IsRunning = true;
-            progressx.IsVisible = true;
+            LoadingPreview.IsVisible = true;
+            
         }
 
         private void WebView_OnNavigated()
         {
-            progressx.IsRunning = false;
-            progressx.IsVisible = false;
+            LoadingPreview.IsVisible = false;
         }
     }
 }

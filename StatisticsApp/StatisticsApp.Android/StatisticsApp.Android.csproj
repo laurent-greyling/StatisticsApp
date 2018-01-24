@@ -75,6 +75,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\finding_quota_files.json" />
     <AndroidAsset Include="Assets\loading_animation.json" />
+    <AndroidAsset Include="Assets\done.json" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
