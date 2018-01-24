@@ -2,9 +2,11 @@
 using StatisticsApp.Helpers;
 using StatisticsApp.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +17,8 @@ namespace StatisticsApp.Views
     public partial class SurveyStatisticsPage : TabbedPage
     {
         public ObservableCollection<SurveyInfo> SurveyInfo { get; set; }
+        public ObservableCollection<QuotaGroup> QuotaGroup { get; set; }
+
         public SurveyCountsModel SurveyCounts { get; set; }
         private AccessToken Token { get; set; }
         private string ServerUrl { get; set; }
@@ -92,31 +96,34 @@ Rejected: {SurveyCounts.RejectedCount}";
                 var rejectPerc = Math.Round((((decimal)SurveyCounts.RejectedCount / (decimal)total) * 100), 1);
                 var totalPerc = Math.Round((successPerc + dropPerc + screenPerc + rejectPerc), 1);
                 SurveyInfo = new ObservableCollection<SurveyInfo>
-            {
-                new SurveyInfo
                 {
-                    SurveyName = SurveyDetails.SurveyName,
-                    Success = $"{SurveyCounts.SuccessfulCount} total successful interviews",
-                    ActiveLive = $"{SurveyCounts.ActiveLiveCount} active live interviews",
-                    ActiveTest = $"{SurveyCounts.ActiveTestCount} active test interviews",
-                    Total = (SurveyCounts.SuccessfulCount
-                    + SurveyCounts.DroppedOutCount
-                    + SurveyCounts.ScreenedOutCount
-                    + SurveyCounts.RejectedCount).ToString(),
-                    PercSuccess = $"{successPerc}%",
-                    PercDrop = $"{dropPerc}%",
-                    PercScreen = $"{screenPerc}%",
-                    PercReject = $"{rejectPerc}%",
-                    PercTotal = $"{totalPerc}%",
-                    SurveyCounts = SurveyCounts
-                }
-            };
+                    new SurveyInfo
+                    {
+                        SurveyName = SurveyDetails.SurveyName,
+                        Success = $"{SurveyCounts.SuccessfulCount} total successful interviews",
+                        ActiveLive = $"{SurveyCounts.ActiveLiveCount} active live interviews",
+                        ActiveTest = $"{SurveyCounts.ActiveTestCount} active test interviews",
+                        Total = (SurveyCounts.SuccessfulCount
+                        + SurveyCounts.DroppedOutCount
+                        + SurveyCounts.ScreenedOutCount
+                        + SurveyCounts.RejectedCount).ToString(),
+                        PercSuccess = $"{successPerc}%",
+                        PercDrop = $"{dropPerc}%",
+                        PercScreen = $"{screenPerc}%",
+                        PercReject = $"{rejectPerc}%",
+                        PercTotal = $"{totalPerc}%",
+                        SurveyCounts = SurveyCounts
+                    }
+                };
 
                 if (SurveyCounts.QuotaCounts != null)
                 {
+                    SurveyInfo[0].HasNoQuota = false;
                     SurveyInfo[0].TargetVisible = true;
                     var targetPercentage = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)SurveyCounts.QuotaCounts.Target) * 100), 1);
                     SurveyInfo[0].PercOfTarget = $"{targetPercentage}% of Target";
+
+                    SetUpQuotas();
                 }
             }
             catch (Exception)
@@ -133,6 +140,44 @@ Rejected: {SurveyCounts.RejectedCount}";
             Percentages();
             SurveyStats.ItemsSource = SurveyInfo;
             SurveyStats.EndRefresh();
+        }
+
+        private void SetUpQuotas()
+        {
+            try
+            {
+                QuotaGroup = new ObservableCollection<QuotaGroup>();
+                foreach (var attribute in SurveyCounts.QuotaCounts.Attributes)
+                {
+                    var quotaLevels = new QuotaGroup(attribute.Name);
+                    quotaLevels.AddRange(attribute.Levels);
+
+
+                    QuotaGroup.Add(quotaLevels);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+           
+        }
+
+        public void Handle_QuotaItemTapped(object sender, SelectedItemChangedEventArgs e)
+        {
+            var selected = ((ListView)sender).SelectedItem as QuotaLevel;
+
+            DisplayAlert($"Extra Info {selected.Name}", $@"Dropped Out: {selected.DroppedOutCount}
+Screened Out: {selected.UnsuccessfulCount}
+Rejeceted: {selected.RejectedCount}", "Ok");
+
+            ((ListView)sender).SelectedItem = null;
+        }
+
+        public void Handle_ItemTapped(object sender, SelectedItemChangedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }

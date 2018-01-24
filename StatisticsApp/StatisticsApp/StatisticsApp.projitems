@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\InterviewDetailsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\InterviewQuality.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\QuotaAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\QuotaGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\QuotaLevel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SignInModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyCountsModel.cs" />

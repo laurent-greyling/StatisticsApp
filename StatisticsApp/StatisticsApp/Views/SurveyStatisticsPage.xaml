@@ -11,7 +11,12 @@
     <!--Pages can be added as references or inline-->
     <ContentPage Title="Statistics">
         <StackLayout>
-            <ListView x:Name="SurveyStats" ItemsSource="{Binding SurveyInfo}" RowHeight="1000" IsPullToRefreshEnabled="True" Refreshing="Stats_Refresh">
+            <ListView x:Name="SurveyStats" 
+                      ItemsSource="{Binding SurveyInfo}"
+                      RowHeight="1000"
+                      IsPullToRefreshEnabled="True"
+                      Refreshing="Stats_Refresh"
+                      ItemTapped="Handle_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -37,29 +42,36 @@
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3"/>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Grid.Row="0" Grid.Column="0" Text="Result" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
-                                            <Label Grid.Row="0" Grid.Column="1" Text="Count" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
-                                            <Label Grid.Row="0" Grid.Column="2" Text="% Of Total" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
-                                            <Label Grid.Row="1" Grid.Column="0" Text="Success" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding SurveyCounts.SuccessfulCount}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="1" Grid.Column="2" Text="{Binding PercSuccess}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="2" Grid.Column="0" Text="Dropped Out" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
-                                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding SurveyCounts.DroppedOutCount}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
-                                            <Label Grid.Row="2" Grid.Column="2" Text="{Binding PercDrop}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
-                                            <Label Grid.Row="3" Grid.Column="0" Text="Screened Out" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="3" Grid.Column="1" Text="{Binding SurveyCounts.ScreenedOutCount}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="3" Grid.Column="2" Text="{Binding PercScreen}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="4" Grid.Column="0" Text="Rejected" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
-                                            <Label Grid.Row="4" Grid.Column="1" Text="{Binding SurveyCounts.RejectedCount}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
-                                            <Label Grid.Row="4" Grid.Column="2" Text="{Binding PercReject}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
-                                            <BoxView Grid.Row="5" BackgroundColor="#02a79c" Grid.ColumnSpan="3"/>
-                                            <Label Grid.Row="6" Grid.Column="0" Text="Total" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="6" Grid.Column="1" Text="{Binding SurveyInfo.Total}" FontSize="Medium" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
-                                            <Label Grid.Row="6" Grid.Column="2" Text="{Binding PercTotal}" FontSize="Medium" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="0" Grid.Column="0" BackgroundColor="#02a79c"/>
+                                            <Label Grid.Row="0" Grid.Column="1" Text="Result" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
+                                            <Label Grid.Row="0" Grid.Column="2" Text="Count" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
+                                            <Label Grid.Row="0" Grid.Column="3" Text="% Of Total" FontSize="Large" FontAttributes="Bold" TextColor="White" BackgroundColor="#02a79c" VerticalOptions="Center"/>
+                                            <Label Grid.Row="1" Grid.Column="0" BackgroundColor="#e5f9f8"/>
+                                            <Label Grid.Row="1" Grid.Column="1" Text="Success" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="1" Grid.Column="2" Text="{Binding SurveyCounts.SuccessfulCount}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="1" Grid.Column="3" Text="{Binding PercSuccess}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="2" Grid.Column="0" BackgroundColor="#b8d6d4"/>
+                                            <Label Grid.Row="2" Grid.Column="1" Text="Dropped Out" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                                            <Label Grid.Row="2" Grid.Column="2" Text="{Binding SurveyCounts.DroppedOutCount}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                                            <Label Grid.Row="2" Grid.Column="3" Text="{Binding PercDrop}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                                            <Label Grid.Row="3" Grid.Column="0" BackgroundColor="#e5f9f8"/>
+                                            <Label Grid.Row="3" Grid.Column="1" Text="Screened Out" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="3" Grid.Column="2" Text="{Binding SurveyCounts.ScreenedOutCount}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="3" Grid.Column="3" Text="{Binding PercScreen}" FontSize="Small" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="4" Grid.Column="0" BackgroundColor="#b8d6d4"/>
+                                            <Label Grid.Row="4" Grid.Column="1" Text="Rejected" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                                            <Label Grid.Row="4" Grid.Column="2" Text="{Binding SurveyCounts.RejectedCount}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                                            <Label Grid.Row="4" Grid.Column="3" Text="{Binding PercReject}" FontSize="Small" BackgroundColor="#b8d6d4" VerticalOptions="Center"/>
+                                            <BoxView Grid.Row="5" BackgroundColor="#02a79c" Grid.ColumnSpan="4"/>
+                                            <Label Grid.Row="6" Grid.Column="0" BackgroundColor="#e5f9f8"/>
+                                            <Label Grid.Row="6" Grid.Column="1" Text="Total" FontSize="Medium" FontAttributes="Bold" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="6" Grid.Column="2" Text="{Binding SurveyInfo.Total}" FontSize="Medium" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
+                                            <Label Grid.Row="6" Grid.Column="3" Text="{Binding PercTotal}" FontSize="Medium" BackgroundColor="#e5f9f8" VerticalOptions="Center"/>
                                         </Grid>
                                     </StackLayout>
                                 </Frame>
@@ -70,5 +82,53 @@
             </ListView>
         </StackLayout>        
     </ContentPage>
-    <ContentPage Title="Quota" />
+    <ContentPage Title="Quota">
+        <StackLayout>
+            <Frame IsVisible="{Binding HasQuota}">
+                <Label Text="No Quotas Setup Dipshit"/>
+            </Frame>
+            <ListView ItemsSource="{Binding QuotaGroup}"
+                  GroupHeaderTemplate="{Binding LevelName}"
+                  IsGroupingEnabled="True"
+                  HasUnevenRows="True"
+                  CachingStrategy="RecycleElement"
+                  x:Name="QuotaList"
+                  ItemTapped="Handle_QuotaItemTapped" >
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="#02867d">
+                                <Label Text="{Binding LevelName}" 
+                                   TextColor="White"
+                                   FontAttributes="Bold" 
+                                   FontSize="Large" 
+                                   HorizontalOptions="CenterAndExpand" 
+                                   VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="3"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="1" Text="{Binding Name}" FontSize="Medium"/>
+                                    <Label Grid.Column="2" Text="{Binding SuccessfulCount}" FontSize="Medium" HorizontalOptions="Start"/>
+                                    <Label Grid.Column="2" Text="/" FontSize="Medium" HorizontalOptions="Center"/>
+                                    <Label Grid.Column="2" Text="{Binding Target}" FontSize="Medium" HorizontalOptions="End"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
 </TabbedPage>
