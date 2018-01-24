@@ -200,5 +200,13 @@ Rejeceted: {selected.RejectedCount}", "Ok");
                 ? QuotaList.ItemsSource = QuotaGroup
                 : QuotaList.ItemsSource = QuotaGroup.Where(x => x.Any(n => n.Name.Contains(e.NewTextValue)));
         }
+        
+        private void Quota_Refresh(object sender, EventArgs e)
+        {
+            GetCounts();
+            Percentages();
+            QuotaList.ItemsSource = QuotaGroup;
+            QuotaList.EndRefresh();
+        }
     }
 }

@@ -101,7 +101,9 @@
                   HasUnevenRows="True"
                   CachingStrategy="RecycleElement"
                   x:Name="QuotaList"
-                  ItemTapped="Handle_QuotaItemTapped" >
+                  ItemTapped="Handle_QuotaItemTapped"
+                  IsPullToRefreshEnabled="True"
+                  Refreshing="Quota_Refresh">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell>
