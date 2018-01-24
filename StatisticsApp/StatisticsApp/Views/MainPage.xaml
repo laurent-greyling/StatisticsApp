@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StatisticsApp.Views.MainPage">
+             x:Class="StatisticsApp.Views.MainPage"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
     <ContentPage.Content>
         <StackLayout Spacing="10" Padding="10">
             <Grid>
@@ -34,7 +35,15 @@
                         </Picker>
                     </StackLayout>
                 </Frame>
-                <ActivityIndicator Grid.Row="3" x:Name="progressx" IsRunning="False" IsVisible="False" HorizontalOptions="CenterAndExpand"/>
+                <forms:AnimationView 
+                    Grid.Row="3"
+                    x:Name="Loading" 
+                    Animation="loading_animation.json" 
+                    AutoPlay="True" Loop="True"
+                    IsVisible="False"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
+                <!--<ActivityIndicator Grid.Row="3" x:Name="progressx" IsRunning="False" IsVisible="False" HorizontalOptions="CenterAndExpand"/>-->
                 <Button Grid.Row="3" x:Name="signIn" IsVisible="True" Text="Sign In" FontSize="Medium" Clicked="SignIn" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" BackgroundColor="#02a79c"/>
             </Grid>            
         </StackLayout>

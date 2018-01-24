@@ -27,8 +27,9 @@ namespace StatisticsApp.Views
         {
             try
             {
-                progressx.IsVisible = true;
-                progressx.IsRunning = true;
+                Loading.IsVisible = true;
+                //progressx.IsVisible = true;
+                //progressx.IsRunning = true;
                 signIn.IsVisible = false;
                 signIn.IsEnabled = false;
 
@@ -73,8 +74,9 @@ namespace StatisticsApp.Views
             }
             finally
             {
-                progressx.IsVisible = false;
-                progressx.IsRunning = false;
+                //progressx.IsVisible = false;
+                //progressx.IsRunning = false;
+                Loading.IsVisible = false;
                 signIn.IsVisible = true;
                 signIn.IsEnabled = true;
             };
