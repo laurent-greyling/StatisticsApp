@@ -118,7 +118,7 @@ Rejected: {SurveyCounts.RejectedCount}";
 
                 if (SurveyCounts.QuotaCounts != null)
                 {
-                    SurveyInfo[0].HasNoQuota = false;
+                    NoQuota.IsVisible = false;
                     SurveyInfo[0].TargetVisible = true;
                     var targetPercentage = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)SurveyCounts.QuotaCounts.Target) * 100), 1);
                     SurveyInfo[0].PercOfTarget = $"{targetPercentage}% of Target";

@@ -14,7 +14,6 @@
         public string PercReject { get; set; }
         public string PercTotal { get; set; }
         public bool TargetVisible { get; set; } = false;
-        public bool HasNoQuota { get; set; } = true;
 
         public SurveyCountsModel SurveyCounts { get; set; }
     }

@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Lottie.Forms.Droid;
 
 namespace StatisticsApp.Droid
 {
@@ -16,6 +17,8 @@ namespace StatisticsApp.Droid
             base.OnCreate(bundle);
             //ScreenshotManager.Activity = this;
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            AnimationViewRenderer.Init();
             LoadApplication(new App());
         }
     }

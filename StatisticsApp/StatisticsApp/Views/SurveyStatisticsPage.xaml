@@ -2,6 +2,7 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StatisticsApp.Views.SurveyStatisticsPage"
+            xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
             Title="{Binding SurveyInfo[0].SurveyName}" 
             BarBackgroundColor="#02a79c"
             BarTextColor="White">
@@ -84,8 +85,13 @@
     </ContentPage>
     <ContentPage Title="Quota">
         <StackLayout>
-            <Frame IsVisible="{Binding HasQuota}">
-                <Label Text="No Quotas Setup Dipshit"/>
+            <Frame HeightRequest="500" x:Name="NoQuota" IsVisible="True">
+                <forms:AnimationView 
+                    x:Name="AnimationViews" 
+                    Animation="finding_quota_files.json" 
+                    AutoPlay="True" Loop="True"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"/>
             </Frame>
             <ListView ItemsSource="{Binding QuotaGroup}"
                   GroupHeaderTemplate="{Binding LevelName}"
