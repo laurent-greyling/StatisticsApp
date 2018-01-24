@@ -91,11 +91,13 @@ Rejected: {SurveyCounts.RejectedCount}";
                + SurveyCounts.ScreenedOutCount
                + SurveyCounts.RejectedCount);
 
-                var successPerc = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)total) * 100), 1);
-                var dropPerc = Math.Round((((decimal)SurveyCounts.DroppedOutCount / (decimal)total) * 100), 1);
-                var screenPerc = Math.Round((((decimal)SurveyCounts.ScreenedOutCount / (decimal)total) * 100), 1);
-                var rejectPerc = Math.Round((((decimal)SurveyCounts.RejectedCount / (decimal)total) * 100), 1);
-                var totalPerc = Math.Round((successPerc + dropPerc + screenPerc + rejectPerc), 1);
+                if (total == null) total = 0;
+                var successPerc = total != 0 ? Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)total) * 100), 1) : 0;
+                var dropPerc = total != 0 ? Math.Round((((decimal)SurveyCounts.DroppedOutCount / (decimal)total) * 100), 1) : 0;
+                var screenPerc = total != 0 ? Math.Round((((decimal)SurveyCounts.ScreenedOutCount / (decimal)total) * 100), 1) : 0;
+                var rejectPerc = total != 0 ? Math.Round((((decimal)SurveyCounts.RejectedCount / (decimal)total) * 100), 1) : 0;
+                var totalPerc = total != 0 ? Math.Round((successPerc + dropPerc + screenPerc + rejectPerc), 1) : 0;
+
                 SurveyInfo = new ObservableCollection<SurveyInfo>
                 {
                     new SurveyInfo
@@ -120,10 +122,11 @@ Rejected: {SurveyCounts.RejectedCount}";
                 if (SurveyCounts.QuotaCounts != null)
                 {
                     NoQuota.IsVisible = false;
+                    TargetBar.IsVisible = true;
                     SurveyInfo[0].TargetVisible = true;
                     var targetPercentage = Math.Round((((decimal)SurveyCounts.SuccessfulCount / (decimal)SurveyCounts.QuotaCounts.Target) * 100), 1);
                     SurveyInfo[0].PercOfTarget = $"{targetPercentage}% of Target";
-
+                    SurveyInfo[0].Target = SurveyCounts.QuotaCounts.Target.ToString();
                     SetUpQuotas();
                 }
             }

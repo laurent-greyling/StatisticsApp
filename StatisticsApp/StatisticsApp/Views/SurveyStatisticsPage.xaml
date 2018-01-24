@@ -111,7 +111,7 @@
                                 <Label Text="{Binding LevelName}" 
                                    TextColor="White"
                                    FontAttributes="Bold" 
-                                   FontSize="Large" 
+                                   FontSize="Medium" 
                                    HorizontalOptions="CenterAndExpand" 
                                    VerticalOptions="CenterAndExpand"/>
                             </StackLayout>
@@ -126,19 +126,31 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="3"/>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="1"/>
+                                        <ColumnDefinition Width="40"/>
                                         <ColumnDefinition Width="3"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="1" Text="{Binding Name}" FontSize="Medium"/>
-                                    <Label Grid.Column="2" Text="{Binding SuccessfulCount}" FontSize="Medium" HorizontalOptions="Start"/>
-                                    <Label Grid.Column="2" Text="/" FontSize="Medium" HorizontalOptions="Center"/>
-                                    <Label Grid.Column="2" Text="{Binding Target}" FontSize="Medium" HorizontalOptions="End"/>
+                                    <Label Grid.Column="1" Text="{Binding Name}" FontSize="Small"/>
+                                    <Label Grid.Column="2" BackgroundColor="#e5f9f8"/>
+                                    <Label Grid.Column="3" Text="{Binding SuccessfulCount}" FontSize="Small" HorizontalOptions="Center"/>
+                                    <Label Grid.Column="4" BackgroundColor="#e5f9f8"/>
+                                    <Label Grid.Column="5" Text="{Binding Target}" FontSize="Small" HorizontalOptions="Center"/>
                                 </Grid>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Frame BackgroundColor="#02a79c" x:Name="TargetBar" IsVisible="False">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                    <Label Text="Target" TextColor="White" FontSize="Large" />
+                    <Label Text="{Binding SurveyInfo[0].SurveyCounts.SuccessfulCount}" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+                    <Label Text="of" TextColor="White" FontSize="Large"/>
+                    <Label Text="{Binding SurveyInfo[0].Target}" TextColor="White" FontSize="Large" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage>
 </TabbedPage>
