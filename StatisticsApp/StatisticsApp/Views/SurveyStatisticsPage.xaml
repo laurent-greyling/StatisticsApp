@@ -7,6 +7,7 @@
             BarBackgroundColor="#02a79c"
             BarTextColor="White">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_search_white_24dp.png" Clicked="Tapped_Search" />
         <ToolbarItem Icon="ic_share_white_24dp.png" Clicked="Share" />
     </ContentPage.ToolbarItems>
     <!--Pages can be added as references or inline-->
@@ -83,8 +84,9 @@
             </ListView>
         </StackLayout>        
     </ContentPage>
-    <ContentPage Title="Quota">
+    <ContentPage Title="Quota" x:Name="QuotaTab">
         <StackLayout>
+            <SearchBar Placeholder="Search" TextChanged="SearchBar_OnTextChanged" x:Name="SearchBarQuota" IsVisible="False" HeightRequest="50"/>
             <Frame HeightRequest="500" x:Name="NoQuota" IsVisible="True">
                 <forms:AnimationView 
                     x:Name="AnimationViews" 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -156,9 +157,8 @@ Rejected: {SurveyCounts.RejectedCount}";
                     QuotaGroup.Add(quotaLevels);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
                 throw;
             }
            
@@ -178,6 +178,27 @@ Rejeceted: {selected.RejectedCount}", "Ok");
         public void Handle_ItemTapped(object sender, SelectedItemChangedEventArgs e)
         {
             ((ListView)sender).SelectedItem = null;
+        }
+
+        private void Tapped_Search()
+        {
+            if (!SearchBarQuota.IsVisible)
+            {
+                CurrentPage = QuotaTab;
+                SearchBarQuota.IsVisible = true;
+                SearchBarQuota.Focus();
+            }
+            else
+            {
+                SearchBarQuota.IsVisible = false;                
+            }
+        }
+
+        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            QuotaList.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue)
+                ? QuotaList.ItemsSource = QuotaGroup
+                : QuotaList.ItemsSource = QuotaGroup.Where(x => x.Any(n => n.Name.Contains(e.NewTextValue)));
         }
     }
 }

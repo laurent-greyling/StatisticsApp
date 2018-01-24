@@ -143,6 +143,7 @@ namespace StatisticsApp.Views
 
         private void Tapped_Search()
         {
+            SearchBar.Focus();
             SearchBar.IsVisible = !SearchBar.IsVisible ? true : false;
         }
 
