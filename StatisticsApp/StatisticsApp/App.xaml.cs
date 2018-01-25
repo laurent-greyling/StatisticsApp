@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Linq;
+using StatisticsApp.Services;
 using StatisticsApp.Views;
 using Xamarin.Forms;
 
@@ -8,12 +9,23 @@ namespace StatisticsApp
 	public partial class App : Application
 	{
 
-		public App ()
+        public DisclaimerRead _db = new DisclaimerRead();
+
+        public App ()
 		{
 			InitializeComponent();
 
 
-            MainPage = new NavigationPage(new MainPage());
+            var isRead = _db.GetIsRead().FirstOrDefault();
+
+            if (isRead == null || !isRead.IsRead)
+            {
+                MainPage = new NavigationPage(new DisclaimerPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
 
 		protected override void OnStart ()

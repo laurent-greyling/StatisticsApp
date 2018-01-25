@@ -16,6 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\AddToFav.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\DisclaimerEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RestApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IScreenshotManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ISQLite.cs" />
@@ -32,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyPublicIdModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveysModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\DisclaimerRead.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\FavToggle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -47,6 +49,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\SurveyStatisticsPage.xaml.cs">
       <DependentUpon>SurveyStatisticsPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\DisclaimerPage.xaml.cs">
+      <DependentUpon>DisclaimerPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -67,6 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SurveyStatisticsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\DisclaimerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

@@ -19,6 +19,7 @@ namespace StatisticsApp.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             AnimationViewRenderer.Init();
+            
             LoadApplication(new App());
         }
     }

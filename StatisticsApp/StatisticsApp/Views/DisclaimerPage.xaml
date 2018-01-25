@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StatisticsApp.Views.DisclaimerPage"
+             Title="Disclaimer">
+    <ContentPage.Content>
+        <StackLayout Padding="5,5,5,5">
+            <Frame>
+                <StackLayout Padding="5,5,5,5">
+                    <Label Text="This App is made available exclusively for the purposes of providing general information to legitimate users of the Nfield platform. Users of this App confirm that they are entitled by their Domain Administrator and/ or employer to access information through this App.  This App only has general informative purpose, NIPO does not accept any responsibility or liability for the accuracy, completeness, legality, or reliability of the information presented in this App, nor what will be done with the information."/>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="Accept.png" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Accept_Dislaimer"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image Source="Decline.png" >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Decline_Dislaimer"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
