@@ -44,7 +44,14 @@
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"/>
                 <!--<ActivityIndicator Grid.Row="3" x:Name="progressx" IsRunning="False" IsVisible="False" HorizontalOptions="CenterAndExpand"/>-->
-                <Button Grid.Row="3" x:Name="signIn" IsVisible="True" Text="Sign In" FontSize="Medium" Clicked="SignIn" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="White" BackgroundColor="#02a79c"/>
+                <Button Grid.Row="3" x:Name="signIn"
+                        IsVisible="True"
+                        FontSize="Medium"
+                        Clicked="SignIn"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        TextColor="Transparent"
+                        Image="signin.png"/>
             </Grid>            
         </StackLayout>
     </ContentPage.Content>

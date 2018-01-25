@@ -21,6 +21,7 @@
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
 
+    <item name="android:buttonStyle">@style/Base.Widget.AppCompat.Button.Borderless</item>
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
     <item name="android:colorPressedHighlight">@color/ListViewSelected</item>
     <item name="android:colorLongPressedHighlight">@color/ListViewHighlighted</item>

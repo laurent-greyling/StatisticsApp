@@ -11,6 +11,9 @@
         public string InterviewerInstruction { get; set; }
 
         public string Icon { get; set; }
+        public string Image { get; set; }
+
+        public bool IsFavourite { get; set; }
         public string SuccessFulCount { get; set; }
     }
 }

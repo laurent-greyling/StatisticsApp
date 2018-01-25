@@ -15,8 +15,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\AddToFav.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RestApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IScreenshotManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ISQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AccessToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FieldworkStatus.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\InterviewDetailsModel.cs" />
@@ -30,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyPublicIdModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveysModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\FavToggle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -48,7 +51,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
   </ItemGroup>
   <ItemGroup>

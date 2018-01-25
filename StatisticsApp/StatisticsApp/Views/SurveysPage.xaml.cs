@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using StatisticsApp.Helpers;
 using StatisticsApp.Models;
+using StatisticsApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ namespace StatisticsApp.Views
     public partial class SurveysPage : ContentPage
     {
         public ObservableCollection<SurveyDetails> Surveys { get; set; }
+        public FavToggle _db = new FavToggle();
 
         private string ServerUrl { get; set; }
         private AccessToken Token { get; set; }
@@ -27,10 +29,11 @@ namespace StatisticsApp.Views
             ServerUrl = serverUrl;
             Token = token;
             GetSurveys();
+            Favourites();
 
             BindingContext = this;
         }
-        
+
         private void GetSurveys()
         {
             try
@@ -58,7 +61,7 @@ namespace StatisticsApp.Views
                         continue;
                     }
 
-                    item.Icon = "smartphone.png";
+                    item.Icon = "ic_android_black_24dp.png";
 
                     if (item.SurveyType == "OnlineBasic")
                     {
@@ -66,6 +69,7 @@ namespace StatisticsApp.Views
                     }
 
                     item.SuccessFulCount = $"{CompletedCount(item.SurveyId)}";
+
                 }
             }
             catch (Exception)
@@ -159,6 +163,76 @@ namespace StatisticsApp.Views
             GetSurveys();
             SurveyList.ItemsSource = Surveys;
             SurveyList.EndRefresh();
+        }
+
+        public void Select_As_Favourite(object sender, EventArgs e)
+        {
+            var fav = sender as Button;
+            
+            var favSurvey = Surveys.FirstOrDefault(s => s.SurveyId == fav.Text);
+            
+            if (favSurvey.Image == "unselect.png")
+            {
+                favSurvey.Image = "selected.png";
+                favSurvey.IsFavourite = true;
+            }
+            else
+            {
+                favSurvey.Image = "unselect.png";
+                favSurvey.IsFavourite = false;
+            }
+
+            var isSurveyAdded = _db.GetFavourites().FirstOrDefault(x => x.SurveId == fav.Text);
+
+            if (isSurveyAdded == null || string.IsNullOrEmpty(isSurveyAdded.SurveId))
+            {
+                _db.AddFav(fav.Text, favSurvey.IsFavourite, favSurvey.Image);
+            }
+            else
+            {
+                _db.UpdateFav(fav.Text, favSurvey.IsFavourite, favSurvey.Image);
+            }
+            
+            Favourites();
+            SurveyList.ItemsSource = Surveys;
+        }
+
+        private void Favourites()
+        {
+            foreach (var survey in Surveys)
+            {
+                var localSurvey = _db.GetFavourites().FirstOrDefault(x => x.SurveId == survey.SurveyId);
+
+                if (localSurvey == null || string.IsNullOrEmpty(localSurvey.SurveId) || !localSurvey.IsFavourite)
+                {
+                    survey.IsFavourite = false;
+                    survey.Image = "unselect.png";
+                }
+                else
+                {
+                    survey.IsFavourite = true;
+                    survey.Image = "select.png";
+                }
+            }
+
+            var ordered = from survey in Surveys
+                          orderby !survey.IsFavourite
+                          select new SurveyDetails()
+                          {
+                              SurveyId = survey.SurveyId,
+                              SurveyName = survey.SurveyName,
+                              ClientName =survey.ClientName,
+                              SurveyType = survey.SurveyType,
+                              Description = survey.Description,
+                              QuestionnaireMD5 = survey.QuestionnaireMD5,
+                              InterviewerInstruction = survey.InterviewerInstruction,
+                              Icon = survey.Icon,
+                              Image = survey.Image,
+                              IsFavourite = survey.IsFavourite,
+                              SuccessFulCount =survey.SuccessFulCount
+                          };
+
+            Surveys = new ObservableCollection<SurveyDetails>(ordered);
         }
     }
 }
