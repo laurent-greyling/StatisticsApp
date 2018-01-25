@@ -6,7 +6,7 @@ using Lottie.Forms.Droid;
 
 namespace StatisticsApp.Droid
 {
-    [Activity(Label = "Nfield Statistics", Icon = "@drawable/barchart", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Nfield Statistics", Icon = "@drawable/barchart", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
