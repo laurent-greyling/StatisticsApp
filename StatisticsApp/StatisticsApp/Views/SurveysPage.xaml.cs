@@ -65,7 +65,7 @@ namespace StatisticsApp.Views
 
                     if (item.SurveyType == "OnlineBasic")
                     {
-                        item.Icon = "analytics.png";
+                        item.Icon = "ic_online_24dp.png";
                     }
 
                     item.SuccessFulCount = $"{CompletedCount(item.SurveyId)}";
