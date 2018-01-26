@@ -17,7 +17,7 @@
                 <Frame VerticalOptions="CenterAndExpand" Grid.Row="2">
                     <StackLayout Padding="5,5,5,5">
                         <Label Text="User Name" FontSize="Medium" />
-                        <Entry x:Name="UserName" />
+                        <Entry x:Name="UserName"/>
                         <Label Text="Domain" FontSize="Medium" />
                         <Entry x:Name="Domain" />
                         <Label Text="Password" FontSize="Medium" />
@@ -31,6 +31,7 @@
                                 <x:String>Orange</x:String>
                                 <x:String>White</x:String>
                                 <x:String>Yellow</x:String>
+                                <x:String>Demo</x:String>
                             </Picker.Items>
                         </Picker>
                     </StackLayout>
@@ -43,7 +44,6 @@
                     IsVisible="False"
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"/>
-                <!--<ActivityIndicator Grid.Row="3" x:Name="progressx" IsRunning="False" IsVisible="False" HorizontalOptions="CenterAndExpand"/>-->
                 <Button Grid.Row="3" x:Name="signIn"
                         IsVisible="True"
                         FontSize="Medium"

@@ -28,8 +28,6 @@ namespace StatisticsApp.Views
             try
             {
                 Loading.IsVisible = true;
-                //progressx.IsVisible = true;
-                //progressx.IsRunning = true;
                 signIn.IsVisible = false;
                 signIn.IsEnabled = false;
 
@@ -74,8 +72,6 @@ namespace StatisticsApp.Views
             }
             finally
             {
-                //progressx.IsVisible = false;
-                //progressx.IsRunning = false;
                 Loading.IsVisible = false;
                 signIn.IsVisible = true;
                 signIn.IsEnabled = true;
@@ -108,6 +104,9 @@ namespace StatisticsApp.Views
                         break;
                     case "Yellow":
                         ServerUrl = "https://yellow-api.niposoftware-dev.com";
+                        break;
+                    case "Demo":
+                        ServerUrl = "https://api.nfieldmr.com";
                         break;
                     default:
                         break;
