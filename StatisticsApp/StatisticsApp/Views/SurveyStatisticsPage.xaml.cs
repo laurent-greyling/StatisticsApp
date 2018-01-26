@@ -151,20 +151,39 @@ Rejected: {SurveyCounts.RejectedCount}";
             try
             {
                 QuotaGroup = new ObservableCollection<QuotaGroup>();
-                foreach (var attribute in SurveyCounts.QuotaCounts.Attributes)
-                {
-                    var quotaLevels = new QuotaGroup(attribute.Name);
-                    quotaLevels.AddRange(attribute.Levels);
-
-
-                    QuotaGroup.Add(quotaLevels);
-                }
+                var group = new QuotaGroup("");
+                QuotaGroup = Something(SurveyCounts.QuotaCounts.Attributes, group, QuotaGroup, "");
+                
             }
             catch (Exception)
             {
                 throw;
             }
-           
+        }
+
+        private ObservableCollection<QuotaGroup> Something(List<QuotaAttribute> quotaAttributes,
+            QuotaGroup group,
+            ObservableCollection<QuotaGroup> quotaCollection,
+            string name)
+        {
+            foreach (var attribute in quotaAttributes)
+            {
+                //TODO: Fix names
+                //name = attribute.Name;
+
+                group = new QuotaGroup(name);
+                foreach (var level in attribute.Levels)
+                {                    
+                    group.Add(level);
+                    name = level.Attributes != null ? level.Name : attribute.Name;
+
+                    Something(level.Attributes, group, quotaCollection, name);
+                }
+
+                quotaCollection.Add(group);
+            }
+
+            return quotaCollection;
         }
 
         public void Handle_QuotaItemTapped(object sender, SelectedItemChangedEventArgs e)
