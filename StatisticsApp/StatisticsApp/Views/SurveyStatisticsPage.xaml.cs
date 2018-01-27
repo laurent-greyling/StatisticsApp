@@ -164,20 +164,19 @@ Rejected: {SurveyCounts.RejectedCount}";
         private ObservableCollection<QuotaGroup> Something(List<QuotaAttribute> quotaAttributes,
             QuotaGroup group,
             ObservableCollection<QuotaGroup> quotaCollection,
-            string name)
+            string name,
+            string levelName = "")
         {
             foreach (var attribute in quotaAttributes)
             {
-                //TODO: Fix names
-                //name = attribute.Name;
+                name = string.IsNullOrEmpty(levelName) ? attribute.Name : levelName;
 
                 group = new QuotaGroup(name);
                 foreach (var level in attribute.Levels)
                 {                    
                     group.Add(level);
-                    name = level.Attributes != null ? level.Name : attribute.Name;
-
-                    Something(level.Attributes, group, quotaCollection, name);
+                    
+                    Something(level.Attributes, group, quotaCollection, name, level.Name);
                 }
 
                 quotaCollection.Add(group);
