@@ -88,25 +88,22 @@ namespace StatisticsApp.Views
                 switch (picker.Items[selectedIndex])
                 {
                     case "RC":
-                        ServerUrl = "https://rc-api.niposoftware-dev.com";
+                        ServerUrl = "https://.com";
                         break;
                     case "Blue":
-                        ServerUrl = "https://blue-api.niposoftware-dev.com";
+                        ServerUrl = "https://.com";
                         break;
                     case "Red":
-                        ServerUrl = "https://red-api.niposoftware-dev.com";
+                        ServerUrl = "https://.com";
                         break;
                     case "Orange":
-                        ServerUrl = "https://orange-api.niposoftware-dev.com";
+                        ServerUrl = "https://.com";
                         break;
                     case "White":
-                        ServerUrl = "https://white-api.niposoftware-dev.com";
+                        ServerUrl = "https://.com";
                         break;
                     case "Yellow":
-                        ServerUrl = "https://yellow-api.niposoftware-dev.com";
-                        break;
-                    case "Demo":
-                        ServerUrl = "https://api.nfieldmr.com";
+                        ServerUrl = "https://.com";
                         break;
                     default:
                         break;

@@ -31,7 +31,6 @@
                                 <x:String>Orange</x:String>
                                 <x:String>White</x:String>
                                 <x:String>Yellow</x:String>
-                                <x:String>Demo</x:String>
                             </Picker.Items>
                         </Picker>
                     </StackLayout>
