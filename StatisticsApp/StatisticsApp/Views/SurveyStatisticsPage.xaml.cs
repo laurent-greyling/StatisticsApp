@@ -219,7 +219,10 @@ Rejeceted: {selected.RejectedCount}", "Ok");
         {
             QuotaList.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue)
                 ? QuotaList.ItemsSource = QuotaGroup
-                : QuotaList.ItemsSource = QuotaGroup.Where(x => x.Any(n => n.Name.Contains(e.NewTextValue)));
+                : QuotaList.ItemsSource = QuotaGroup.Where(x => 
+                x.Any(n => 
+                n.Name.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant())) 
+                || x.LevelName.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()));
         }
         
         private void Quota_Refresh(object sender, EventArgs e)

@@ -155,7 +155,7 @@ namespace StatisticsApp.Views
         {
             SurveyList.ItemsSource = string.IsNullOrWhiteSpace(e.NewTextValue)
                 ? SurveyList.ItemsSource = Surveys
-                : SurveyList.ItemsSource = Surveys.Where(n => n.SurveyName.Contains(e.NewTextValue));
+                : SurveyList.ItemsSource = Surveys.Where(n => n.SurveyName.ToLowerInvariant().Contains(e.NewTextValue.ToLowerInvariant()));
         }
 
         private void Surveys_Refresh(object sender, EventArgs e)
