@@ -16,9 +16,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Fake.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\AddLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ISQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NegateBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NotifyTaskCompletion.cs" />
