@@ -17,9 +17,12 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Fake.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\IEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CreateSqliteTable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ICreateSqliteTable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\AddLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ISQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NegateBooleanConverter.cs" />

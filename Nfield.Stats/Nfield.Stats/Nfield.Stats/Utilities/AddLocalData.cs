@@ -1,17 +1,22 @@
-﻿using Nfield.Stats.Entities;
+﻿using Nfield.Stats.Services;
 using SQLite;
 using Xamarin.Forms;
 
 namespace Nfield.Stats.Utilities
 {
-    public class AddLocalData
+    public class AddLocalData<T>
     {
-        private SQLiteConnection _connection;
+        readonly SQLiteConnection _table;
 
-        public AddLocalData()
+        public AddLocalData(T entity)
         {
-            _connection = DependencyService.Get<ISQLite>().GetConnection();
-            _connection.CreateTable<Fake>();
+            _table = DependencyService.Get<ICreateSqliteTable>().Create<T>();
+        }
+
+        public bool Add(T entity)
+        {
+            _table.Insert(entity);
+            return true;
         }
     }
 }
