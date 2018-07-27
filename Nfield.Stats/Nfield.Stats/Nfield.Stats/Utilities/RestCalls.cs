@@ -21,9 +21,9 @@ namespace Nfield.Stats.Utilities
             await _httpClient.GetAsync(request).ConfigureAwait(false);
         }
 
-        public async Task<string> GetAuthTokenAsync(string request, SignInModel signInDetails)
+        public async Task<string> PostAsync(string request, string serialisedData)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(signInDetails));
+            var content = new StringContent(serialisedData);
             var response = await _httpClient.PostAsync(request, content).ConfigureAwait(false);
 
             response.EnsureSuccessStatusCode();
