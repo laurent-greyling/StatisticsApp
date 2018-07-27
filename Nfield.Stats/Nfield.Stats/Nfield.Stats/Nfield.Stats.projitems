@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SignInModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CreateSqliteTable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DeleteLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\GetLocalData.cs" />
@@ -31,7 +32,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IUpdateLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\UpdateLocalData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\IRest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NegateBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NotifyTaskCompletion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\RestCalls.cs" />
   </ItemGroup>
 </Project>
