@@ -16,5 +16,10 @@ namespace Nfield.Stats.Services
         {
             _table.Delete(entity);
         }
+
+        public void DeleteAll()
+        {
+            _table.DeleteAll<T>();
+        }
     }
 }

@@ -2,8 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
-using Nfield.Stats.Models;
-using Newtonsoft.Json;
 
 namespace Nfield.Stats.Utilities
 {

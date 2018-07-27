@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
-namespace Nfield.Stats
+namespace Nfield.Stats.Views
 {
 	public partial class App : Application
 	{

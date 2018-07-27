@@ -14,7 +14,7 @@ namespace Nfield.Stats.Services
             _table = DependencyService.Get<ICreateSqliteTable>().Create<T>();
         }
         
-        public IEnumerable<T> Get(T entity)
+        public IEnumerable<T> Get()
         {
             return (from tbl in _table.Table<T>() select tbl).ToList();
         }

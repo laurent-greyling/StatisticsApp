@@ -21,7 +21,7 @@ namespace Nfield.Stats.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new Nfield.Stats.App());
+            LoadApplication(new Nfield.Stats.Views.App());
         }
     }
 }
