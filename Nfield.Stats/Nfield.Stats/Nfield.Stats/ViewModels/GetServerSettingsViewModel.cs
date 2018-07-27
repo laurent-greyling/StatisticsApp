@@ -30,10 +30,6 @@ namespace Nfield.Stats.ViewModels
 
         public GetServerSettingsViewModel()
         {
-            var test = DependencyService
-                .Get<IGetLocalData<ServerEntity>>()
-                .Get();
-
             var entity = DependencyService
                 .Get<IGetLocalData<ServerEntity>>()
                 .Get().FirstOrDefault();

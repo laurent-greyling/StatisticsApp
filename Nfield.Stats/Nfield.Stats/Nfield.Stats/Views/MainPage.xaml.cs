@@ -15,7 +15,7 @@ namespace Nfield.Stats.Views
             try
             {
 
-                await Navigation.PushAsync(new AppSettingsView());
+                await Navigation.PushModalAsync(new AppSettingsView());
             }
             catch (System.Exception e)
             {
