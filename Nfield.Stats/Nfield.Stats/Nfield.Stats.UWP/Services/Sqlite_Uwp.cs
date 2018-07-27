@@ -1,4 +1,4 @@
-﻿using Nfield.Stats.Utilities;
+﻿using Nfield.Stats.Services;
 using Nfield.Stats.UWP.Services;
 using SQLite;
 using System.IO;

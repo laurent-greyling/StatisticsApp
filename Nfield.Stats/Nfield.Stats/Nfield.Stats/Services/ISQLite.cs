@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Nfield.Stats.Utilities
+namespace Nfield.Stats.Services
 {
     interface ISQLite
     {

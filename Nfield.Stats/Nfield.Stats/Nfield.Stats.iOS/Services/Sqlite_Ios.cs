@@ -1,5 +1,5 @@
 ﻿using Nfield.Stats.iOS.Services;
-using Nfield.Stats.Utilities;
+using Nfield.Stats.Services;
 using SQLite;
 using System.IO;
 using Xamarin.Forms;

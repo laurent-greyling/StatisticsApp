@@ -1,5 +1,4 @@
-﻿using Nfield.Stats.Utilities;
-using SQLite;
+﻿using SQLite;
 using Xamarin.Forms;
 
 namespace Nfield.Stats.Services

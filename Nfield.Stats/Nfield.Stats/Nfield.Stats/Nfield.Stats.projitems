@@ -17,14 +17,20 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Fake.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Entities\IEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Services\CreateSqliteTable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\DeleteLocalData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\GetLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ICreateSqliteTable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\AddLocalData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ISQLite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\AddLocalData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IAddLocalData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IDeleteLocalData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IGetLocalData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ISQLite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IUpdateLocalData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\UpdateLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NegateBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NotifyTaskCompletion.cs" />
   </ItemGroup>
