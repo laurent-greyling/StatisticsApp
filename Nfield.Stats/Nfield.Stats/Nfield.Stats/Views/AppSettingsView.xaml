@@ -33,9 +33,13 @@
             </Picker>
             <StackLayout Orientation="Horizontal">
                 <Button Text="Save"
-                    Clicked="Save_Server_Settings"/>
+                        TextColor="White"
+                        BackgroundColor="#02a79c"
+                        Clicked="Save_Server_Settings"/>
                 <Button Text="Clear"
-                    Clicked="Clear_Server_Settings"/>
+                        TextColor="White"
+                        BackgroundColor="#02a79c"
+                        Clicked="Clear_Server_Settings"/>
             </StackLayout>            
         </StackLayout>
     </ContentPage.Content>

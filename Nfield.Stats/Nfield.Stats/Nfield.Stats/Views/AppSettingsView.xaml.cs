@@ -98,7 +98,7 @@ namespace Nfield.Stats.Views
             TestServer.SelectedIndex = -1;
             new ClearServerSettingsViewModel();
 
-            ServerDetails = new GetServerSettingsViewModel();
+            ServerDetails = null;
             BindingContext = ServerDetails;
         }
 

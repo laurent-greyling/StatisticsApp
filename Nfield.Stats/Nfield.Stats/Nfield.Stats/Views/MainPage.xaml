@@ -2,14 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Nfield.Stats"
-             x:Class="Nfield.Stats.Views.MainPage">
-
+             x:Class="Nfield.Stats.Views.MainPage"
+             Title="Nfield Statistics">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Settings" Clicked="Navigate_Settings" Priority="0"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
-        <!-- Place new controls here -->
-    	<Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-        <Button Text="Settings" Clicked="Navigate_Settings"/>
     </StackLayout>
 
 </ContentPage>
