@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Nfield.Stats.Views.AppSettingsView">
+             x:Class="Nfield.Stats.Views.AppSettingsView"
+             Title="Settings">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="5,5,5,5">
             <StackLayout Orientation="Horizontal">
-                <Label Text="Selected Server" FontSize="Medium"/>
-                <Label Text="{Binding ServerSettings.ServerDetails.ServerName}" FontSize="Medium"/>
+                <Label Text="Current Selected Server:" FontSize="Small"/>
+                <Label Text="{Binding ServerDetails.ServerName}" FontSize="Small"/>
             </StackLayout>
-            <Label Text="Nfield Server" FontSize="Medium"/>
+            <Label Text="Nfield Server" FontSize="Small"/>
             <Picker x:Name="Server"
                     HorizontalOptions="FillAndExpand">
                 <Picker.Items>
@@ -18,7 +19,7 @@
                     <x:String>China</x:String>
                 </Picker.Items>
             </Picker>
-            <Label Text="Test Server" FontSize="Medium"/>
+            <Label Text="Test Server" FontSize="Small"/>
             <Picker x:Name="TestServer"
                     HorizontalOptions="FillAndExpand">
                 <Picker.Items>

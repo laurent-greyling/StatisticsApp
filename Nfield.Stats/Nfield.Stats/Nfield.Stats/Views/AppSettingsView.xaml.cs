@@ -15,13 +15,13 @@ namespace Nfield.Stats.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AppSettingsView : ContentPage
 	{
-        public GetServerSettingsViewModel ServerSettings { get; set; }
+        public GetServerSettingsViewModel ServerDetails { get; set; }
 		public AppSettingsView ()
 		{
-            ServerSettings = new GetServerSettingsViewModel();
+            ServerDetails = new GetServerSettingsViewModel();
             InitializeComponent ();
             
-            BindingContext = ServerSettings;
+            BindingContext = ServerDetails;
 
         }
 
@@ -84,22 +84,22 @@ namespace Nfield.Stats.Views
 
             var serverSettings = new SetServerSettingsViewModel(server);
 
-            if (serverSettings.IsSet)
+            if (!serverSettings.IsSet)
             {
-                await Navigation.PushModalAsync(new MainPage());
+                await DisplayAlert("Error", "Something went wrong saving setting, please try again", "Ok");                
             }
 
-            await DisplayAlert("Error", "Something went wrong saving setting, please try again", "Ok");
+            await Navigation.PushAsync(new MainPage());
         }
 
         private void Clear_Server_Settings(object sender, EventArgs e)
         {
-            Server.Items.Clear();
-            TestServer.Items.Clear();
+            Server.SelectedIndex = -1;
+            TestServer.SelectedIndex = -1;
             new ClearServerSettingsViewModel();
 
-            ServerSettings = new GetServerSettingsViewModel();
-            BindingContext = ServerSettings;
+            ServerDetails = new GetServerSettingsViewModel();
+            BindingContext = ServerDetails;
         }
 
         private string SelectedServer()
@@ -113,7 +113,7 @@ namespace Nfield.Stats.Views
             if (isBothSelected || isServer)
             {
                 selectedItem = Server.Items[Server.SelectedIndex];
-                TestServer.Items.Clear();
+                TestServer.SelectedIndex = -1;
             }
 
             if (isTestServer)

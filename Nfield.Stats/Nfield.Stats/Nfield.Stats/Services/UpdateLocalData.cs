@@ -15,7 +15,7 @@ namespace Nfield.Stats.Services
 
         public void Update(T entity)
         {
-            _table.Update(entity);
+            _table.InsertOrReplace(entity);
         }
 
         public void UpdateRange(List<T> entities)

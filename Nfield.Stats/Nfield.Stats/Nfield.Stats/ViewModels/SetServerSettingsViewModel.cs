@@ -33,7 +33,20 @@ namespace Nfield.Stats.ViewModels
 
         public SetServerSettingsViewModel(ServerEntity server)
         {
-            DependencyService.Get<IUpdateLocalData<ServerEntity>>().Update(server);
+            var exist = DependencyService
+                .Get<IGetLocalData<ServerEntity>>()
+                .Get()
+                .FirstOrDefault();
+
+            if (exist == null)
+            {
+                DependencyService.Get<IAddLocalData<ServerEntity>>().Add(server);
+            }
+            else
+            {
+                DependencyService.Get<IUpdateLocalData<ServerEntity>>().Update(server);
+            }
+            
             var entity = DependencyService
                 .Get<IGetLocalData<ServerEntity>>()
                 .Get()

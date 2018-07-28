@@ -7,21 +7,13 @@ namespace Nfield.Stats.Views
 	{
 		public MainPage()
 		{
-			InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            InitializeComponent();
 		}
 
         private async Task Navigate_Settings()
         {
-            try
-            {
-
-                await Navigation.PushModalAsync(new AppSettingsView());
-            }
-            catch (System.Exception e)
-            {
-
-                throw;
-            }
+            await Navigation.PushAsync(new AppSettingsView());
         }
 
     }

@@ -34,7 +34,7 @@ namespace Nfield.Stats.ViewModels
                 .Get<IGetLocalData<ServerEntity>>()
                 .Get().FirstOrDefault();
 
-            var ServerDetails = entity != null 
+            ServerDetails = entity != null 
                 ? DependencyService
                 .Get<IGetLocalData<ServerEntity>>()
                 .Get().FirstOrDefault()

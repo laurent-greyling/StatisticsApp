@@ -19,7 +19,7 @@ namespace Nfield.Stats.Views
             DependencyService.Register<UpdateLocalData<ServerEntity>>();
             DependencyService.Register<DeleteLocalData<ServerEntity>>();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
 		}
 
 		protected override void OnStart ()
