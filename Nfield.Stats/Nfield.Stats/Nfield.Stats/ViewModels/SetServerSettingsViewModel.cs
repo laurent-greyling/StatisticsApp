@@ -1,12 +1,8 @@
 ﻿using Nfield.Stats.Entities;
 using Nfield.Stats.Services;
-using Nfield.Stats.Utilities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Nfield.Stats.ViewModels
@@ -33,23 +29,21 @@ namespace Nfield.Stats.ViewModels
 
         public SetServerSettingsViewModel(ServerEntity server)
         {
-            var exist = DependencyService
-                .Get<IGetLocalData<ServerEntity>>()
-                .Get()
-                .FirstOrDefault();
+            var service = DependencyService
+                .Get<ISqliteService<ServerEntity>>();
+
+            var exist = service.Get().FirstOrDefault();
 
             if (exist == null)
             {
-                DependencyService.Get<IAddLocalData<ServerEntity>>().Add(server);
+                service.Add(server);
             }
             else
             {
-                DependencyService.Get<IUpdateLocalData<ServerEntity>>().Update(server);
+                service.Update(server);
             }
             
-            var entity = DependencyService
-                .Get<IGetLocalData<ServerEntity>>()
-                .Get()
+            var entity = service.Get()
                 .Where(x=>x.ServerName == server.ServerName);
 
             IsSet = entity != null;

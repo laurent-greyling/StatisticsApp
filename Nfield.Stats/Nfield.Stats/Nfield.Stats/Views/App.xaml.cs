@@ -1,6 +1,5 @@
 using Nfield.Stats.Entities;
 using Nfield.Stats.Services;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,10 +13,7 @@ namespace Nfield.Stats.Views
 			InitializeComponent();
 
             DependencyService.Register<CreateSqliteTable>();
-            DependencyService.Register<GetLocalData<ServerEntity>>();
-            DependencyService.Register<AddLocalData<ServerEntity>>();
-            DependencyService.Register<UpdateLocalData<ServerEntity>>();
-            DependencyService.Register<DeleteLocalData<ServerEntity>>();
+            DependencyService.Register<SqliteService<ServerEntity>>();
 
             MainPage = new NavigationPage(new MainPage());
 		}

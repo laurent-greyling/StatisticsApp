@@ -30,15 +30,12 @@ namespace Nfield.Stats.ViewModels
 
         public GetServerSettingsViewModel()
         {
-            var entity = DependencyService
-                .Get<IGetLocalData<ServerEntity>>()
-                .Get().FirstOrDefault();
+            var service = DependencyService
+                .Get<ISqliteService<ServerEntity>>();
 
-            ServerDetails = entity != null 
-                ? DependencyService
-                .Get<IGetLocalData<ServerEntity>>()
-                .Get().FirstOrDefault()
-                : new ServerEntity();
+            var entity = service.Get().FirstOrDefault();
+
+            ServerDetails = entity ?? new ServerEntity();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

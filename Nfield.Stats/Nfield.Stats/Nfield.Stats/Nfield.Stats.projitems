@@ -14,6 +14,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\ServerEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ISqliteService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SqliteService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ClearServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GetServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SetServerSettingsViewModel.cs" />
@@ -31,16 +33,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\AppConst.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SignInModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CreateSqliteTable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\DeleteLocalData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\GetLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ICreateSqliteTable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\AddLocalData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IAddLocalData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IDeleteLocalData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IGetLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISQLite.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\IUpdateLocalData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\UpdateLocalData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\IRest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NegateBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NotifyTaskCompletion.cs" />
