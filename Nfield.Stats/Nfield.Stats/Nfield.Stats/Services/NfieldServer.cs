@@ -62,6 +62,10 @@ namespace Nfield.Stats.Services
                     server.NfieldServer = AppConst.UrlYellow;
                     server.ServerName = AppConst.Yellow;
                     break;
+                case AppConst.Rc:
+                    server.NfieldServer = AppConst.UrlRc;
+                    server.ServerName = AppConst.Rc;
+                    break;
                 default:
                     break;
             }

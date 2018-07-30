@@ -133,6 +133,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="nfieldmanager.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Resources\barchart.png" />
     <Content Include="Resources\barchart100.png" />
@@ -149,6 +150,7 @@
     <Content Include="Resources\Splash2480.png" />
     <Content Include="Resources\Splash620.png" />
     <Content Include="Resources\Splash775.png" />
+    <Content Include="signin.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -161,6 +163,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>2.5.4</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
     </PackageReference>

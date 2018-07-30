@@ -12,6 +12,7 @@
         public const string UrlOrange = "";
         public const string UrlYellow = "";
         public const string UrlPurple = "";
+        public const string UrlRc = "";
 
         public const string America = "America";
         public const string Asia = "Asia";
@@ -23,5 +24,6 @@
         public const string Orange = "Orange";
         public const string Yellow = "Yellow";
         public const string Purple = "Purple";
+        public const string Rc = "RC";
     }
 }
