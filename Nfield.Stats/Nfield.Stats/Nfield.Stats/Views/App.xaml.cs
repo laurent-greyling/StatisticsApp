@@ -14,6 +14,7 @@ namespace Nfield.Stats.Views
 
             DependencyService.Register<CreateSqliteTable>();
             DependencyService.Register<SqliteService<ServerEntity>>();
+            DependencyService.Register<NfieldServer>();
 
             MainPage = new NavigationPage(new MainPage());
 		}

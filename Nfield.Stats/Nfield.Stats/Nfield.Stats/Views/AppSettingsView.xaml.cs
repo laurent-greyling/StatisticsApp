@@ -1,27 +1,25 @@
-﻿using Nfield.Stats.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Nfield.Stats.Entities;
-using Nfield.Stats.Models;
+using Nfield.Stats.Services;
 
 namespace Nfield.Stats.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AppSettingsView : ContentPage
 	{
-        public GetServerSettingsViewModel ServerDetails { get; set; }
+        public INfieldServer _nfieldServer;
+
 		public AppSettingsView ()
 		{
-            ServerDetails = new GetServerSettingsViewModel();
+            _nfieldServer = DependencyService
+                .Get<INfieldServer>();
+
             InitializeComponent ();
             
-            BindingContext = ServerDetails;
+            BindingContext = _nfieldServer.Get();
 
         }
 
@@ -35,58 +33,12 @@ namespace Nfield.Stats.Views
                 return;
             }
 
-            var server = new ServerEntity();
-            switch (serverSelected)
-            {
-                case AppConst.America:
-                    server.NfieldServer = AppConst.UrlAmerica;
-                    server.ServerName = AppConst.America;
-                    break;
-                case AppConst.Asia:
-                    server.NfieldServer = AppConst.UrlAsia;
-                    server.ServerName = AppConst.Asia;
-                    break;
-                case AppConst.Blue:
-                    server.NfieldServer = AppConst.UrlBlue;
-                    server.ServerName = AppConst.Blue;
-                    break;
-                case AppConst.China:
-                    server.NfieldServer = AppConst.UrlChina;
-                    server.ServerName = AppConst.China;
-                    break;
-                case AppConst.Europe:
-                    server.NfieldServer = AppConst.UrlEurope;
-                    server.ServerName = AppConst.Europe;
-                    break;
-                case AppConst.Orange:
-                    server.NfieldServer = AppConst.UrlOrange;
-                    server.ServerName = AppConst.Orange;
-                    break;
-                case AppConst.Purple:
-                    server.NfieldServer = AppConst.UrlPurple;
-                    server.ServerName = AppConst.Purple;
-                    break;
-                case AppConst.Red:
-                    server.NfieldServer = AppConst.UrlRed;
-                    server.ServerName = AppConst.Red;
-                    break;
-                case AppConst.White:
-                    server.NfieldServer = AppConst.UrlWhite;
-                    server.ServerName = AppConst.White;
-                    break;
-                case AppConst.Yellow:
-                    server.NfieldServer = AppConst.UrlYellow;
-                    server.ServerName = AppConst.Yellow;
-                    break;
-                default:
-                    break;
-            }
-
-            var serverSettings = new SetServerSettingsViewModel(server);
+            var serverSettings = _nfieldServer.Set(serverSelected);
 
             if (!serverSettings.IsSet)
             {
-                await DisplayAlert("Error", "Something went wrong saving setting, please try again", "Ok");                
+                await DisplayAlert("Error", "Something went wrong saving setting, please try again", "Ok");
+                return;
             }
 
             await Navigation.PushAsync(new MainPage());
@@ -96,10 +48,8 @@ namespace Nfield.Stats.Views
         {
             Server.SelectedIndex = -1;
             TestServer.SelectedIndex = -1;
-            new ClearServerSettingsViewModel();
-
-            ServerDetails = null;
-            BindingContext = ServerDetails;
+            _nfieldServer.Clear();
+            BindingContext = null;
         }
 
         private string SelectedServer()

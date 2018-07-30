@@ -1,4 +1,5 @@
-﻿using Nfield.Stats.ViewModels;
+﻿using Nfield.Stats.Utilities;
+using Nfield.Stats.ViewModels;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,7 +15,6 @@ namespace Nfield.Stats.Views
 
             if (string.IsNullOrEmpty(serverSelected.ServerDetails.ServerName))
             {
-                DisplayAlert("Settings", "You need to have a Nfield Server selected", "Ok");
                 Navigation.PushAsync(new AppSettingsView());
             }
         }
