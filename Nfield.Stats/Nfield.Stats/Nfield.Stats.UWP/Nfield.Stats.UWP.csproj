@@ -111,6 +111,8 @@
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
@@ -132,6 +134,21 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Resources\barchart.png" />
+    <Content Include="Resources\barchart100.png" />
+    <Content Include="Resources\barchart16.png" />
+    <Content Include="Resources\barchart176.png" />
+    <Content Include="Resources\barchart200.png" />
+    <Content Include="Resources\barchart44.png" />
+    <Content Include="Resources\barchart48.png" />
+    <Content Include="Resources\barchart50.png" />
+    <Content Include="Resources\barchart88.png" />
+    <Content Include="Resources\nfieldmanager.png" />
+    <Content Include="Resources\Splash.png" />
+    <Content Include="Resources\Splash1640.png" />
+    <Content Include="Resources\Splash2480.png" />
+    <Content Include="Resources\Splash620.png" />
+    <Content Include="Resources\Splash775.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
