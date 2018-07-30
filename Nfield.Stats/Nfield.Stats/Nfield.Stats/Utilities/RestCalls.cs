@@ -22,16 +22,21 @@ namespace Nfield.Stats.Utilities
 
         public async Task<string> PostAsync(string request, string serialisedData)
         {
-            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var content = new StringContent(serialisedData, Encoding.Unicode, "application/json");
-            var response = await _httpClient.PostAsync(request, content).ConfigureAwait(false);
+            try
+            {
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var content = new StringContent(serialisedData, Encoding.Unicode, "application/json");
+                var response = await _httpClient.PostAsync(request, content).ConfigureAwait(false);
+                
+                var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode();
-
-            var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-            return result;
-
+                return result;
+            }
+            catch (HttpRequestException)
+            {
+                throw;
+            }
+            
         }
 
         public async Task<string> PostAsync(string request, string authToken, string serialisedData)

@@ -32,7 +32,7 @@ namespace Nfield.Stats.ViewModels
         public SignInViewModel(SignInModel signInModel)
         {
             var restService = DependencyService
-                .Get<IRest>();
+            .Get<IRest>();
             var serverService = DependencyService
                 .Get<INfieldServer>();
 
@@ -42,7 +42,6 @@ namespace Nfield.Stats.ViewModels
                 .NfieldServer;
 
             var signInData = JsonConvert.SerializeObject(signInModel);
-
             AccessToken = new NotifyTaskCompletion<string>(restService.PostAsync($"{nfieldServer}/v1/SignIn", signInData));
         }
 

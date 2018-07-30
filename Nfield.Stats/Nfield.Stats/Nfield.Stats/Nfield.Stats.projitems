@@ -14,6 +14,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\ServerEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AuthorizationModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\NfieldCode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\INfieldServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISqliteService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NfieldServer.cs" />

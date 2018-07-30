@@ -1,6 +1,8 @@
-﻿using Nfield.Stats.Models;
+﻿using Newtonsoft.Json;
+using Nfield.Stats.Models;
 using Nfield.Stats.Utilities;
 using Nfield.Stats.ViewModels;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -29,26 +31,32 @@ namespace Nfield.Stats.Views
         {
             try
             {
-                var accessToken = new SignInViewModel(new SignInModel
+                var auth = new SignInViewModel(new SignInModel
                 {
                     Domain = Domain.Text,
                     UserName = UserName.Text,
                     Password = Password.Text
                 });
-                
-                if (accessToken.AccessToken.IsFaulted)
-                {
-                    await DisplayAlert("Access Denied", "User Name or Password is Incorrect", "OK");
-                }
 
-                if (accessToken.AccessToken.IsSuccessfullyCompleted && string.IsNullOrEmpty(accessToken.AccessToken.Result))
-                {
-                    throw new System.Exception();
-                }
+                BindingContext = auth;
 
-                BindingContext = accessToken;
+                //if (auth.AccessToken.IsSuccessfullyCompleted)
+                //{
+                //    var result = JsonConvert.DeserializeObject<AuthorizationModel>(auth.AccessToken.Result);
+
+                //    if (result.NfieldErrorCode == NfieldErrorCode.NotAuthorized)
+                //    {
+                //        throw new Exception();
+                //    }
+
+                //    if (string.IsNullOrEmpty(result.AuthenticationToken))
+                //    {
+                //        throw new Exception();
+                //    }
+                //}
+
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 await DisplayAlert("Access Denied", "User Name or Password is Incorrect", "OK");
             }
