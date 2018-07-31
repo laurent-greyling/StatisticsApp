@@ -34,8 +34,8 @@
                                Color="#EA592E"
                                VerticalOptions="FillAndExpand"
                                HorizontalOptions="FillAndExpand"
-                               IsVisible="{Binding AccessToken.IsNotCompleted}"
-                               IsRunning="{Binding AccessToken.IsNotCompleted}"/>
+                               IsRunning="{Binding AccessToken.IsNotCompleted}"
+                               PropertyChanged="Navigate_On_Success"/>
             <Image Grid.Row="3"
                    x:Name="SignIn"
                    HorizontalOptions="CenterAndExpand"

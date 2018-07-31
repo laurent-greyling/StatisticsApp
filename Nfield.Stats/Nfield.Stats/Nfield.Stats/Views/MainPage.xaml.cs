@@ -10,6 +10,7 @@ namespace Nfield.Stats.Views
 {
 	public partial class MainPage : ContentPage
 	{
+        public SignInViewModel Auth { get; set; }
 		public MainPage()
 		{
             InitializeComponent();
@@ -27,38 +28,47 @@ namespace Nfield.Stats.Views
             await Navigation.PushAsync(new AppSettingsView());
         }
 
-        private async Task Nfield_Signin()
+        private void Nfield_Signin()
+        {
+            Auth = new SignInViewModel(new SignInModel
+            {
+                Domain = Domain.Text,
+                UserName = UserName.Text,
+                Password = Password.Text
+            });
+
+            BindingContext = Auth;
+        }
+
+        private async Task Navigate_On_Success()
         {
             try
             {
-                var auth = new SignInViewModel(new SignInModel
+                if (Auth == null || !Auth.AccessToken.IsSuccessfullyCompleted)
                 {
-                    Domain = Domain.Text,
-                    UserName = UserName.Text,
-                    Password = Password.Text
-                });
+                    return;
+                }
 
-                BindingContext = auth;
+                if (Auth.AccessToken.IsSuccessfullyCompleted)
+                {
+                    var accessToken = JsonConvert.DeserializeObject<AuthorizationModel>(Auth.AccessToken.Result);
 
-                //if (auth.AccessToken.IsSuccessfullyCompleted)
-                //{
-                //    var result = JsonConvert.DeserializeObject<AuthorizationModel>(auth.AccessToken.Result);
+                    if (accessToken.NfieldErrorCode == NfieldErrorCode.NotAuthorized)
+                    {
+                        throw new Exception();
+                    }
 
-                //    if (result.NfieldErrorCode == NfieldErrorCode.NotAuthorized)
-                //    {
-                //        throw new Exception();
-                //    }
+                    if (string.IsNullOrEmpty(accessToken.AuthenticationToken))
+                    {
+                        throw new Exception();
+                    }
 
-                //    if (string.IsNullOrEmpty(result.AuthenticationToken))
-                //    {
-                //        throw new Exception();
-                //    }
-                //}
-
+                    await Navigation.PushAsync(new SurveysListPage(accessToken));
+                }
             }
             catch (Exception)
             {
-                await DisplayAlert("Access Denied", "User Name or Password is Incorrect", "OK");
+                await DisplayAlert("Access Denied", "User Name, Domain or Password is Incorrect", "OK");
             }
         }
     }

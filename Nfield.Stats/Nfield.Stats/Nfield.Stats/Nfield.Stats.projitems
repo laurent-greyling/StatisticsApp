@@ -43,9 +43,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NegateBooleanConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NotifyTaskCompletion.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\RestCalls.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SurveysListPage.xaml.cs">
+      <DependentUpon>SurveysListPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\AppSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SurveysListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

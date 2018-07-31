@@ -46,8 +46,6 @@ namespace Nfield.Stats.Utilities
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authToken);
             var response = await _httpClient.PostAsync(request, content).ConfigureAwait(false);
 
-            response.EnsureSuccessStatusCode();
-
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
             return result;
