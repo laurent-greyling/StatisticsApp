@@ -44,7 +44,7 @@ namespace Nfield.Stats.Views
         {
             try
             {
-                if (Auth == null || !Auth.AccessToken.IsSuccessfullyCompleted)
+                if (Auth == null || Auth.AccessToken.IsNotCompleted)
                 {
                     return;
                 }
