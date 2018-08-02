@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Nfield.Stats.Views.AppSettingsView"
+             Title="Settings">
+    <ContentPage.Content>
+        <StackLayout Padding="5,5,5,5">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Current Selected Server:" FontSize="Small"/>
+                <Label Text="{Binding ServerDetails.ServerName}" FontSize="Small"/>
+            </StackLayout>
+            <Label Text="Nfield Server" FontSize="Small"/>
+            <Picker x:Name="Server"
+                    HorizontalOptions="FillAndExpand">
+                <Picker.Items>
+                    <x:String>America</x:String>
+                    <x:String>Asia</x:String>
+                    <x:String>Europe</x:String>
+                    <x:String>China</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label Text="Test Server" FontSize="Small"/>
+            <Picker x:Name="TestServer"
+                    HorizontalOptions="FillAndExpand">
+                <Picker.Items>
+                    <x:String>Blue</x:String>
+                    <x:String>Orange</x:String>
+                    <x:String>Purple</x:String>
+                    <x:String>Red</x:String>
+                    <x:String>White</x:String>
+                    <x:String>Yellow</x:String>
+                    <x:String>RC</x:String>
+                </Picker.Items>
+            </Picker>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Save"
+                        TextColor="White"
+                        BackgroundColor="#02a79c"
+                        Clicked="Save_Server_Settings"/>
+                <Button Text="Clear"
+                        TextColor="White"
+                        BackgroundColor="#02a79c"
+                        Clicked="Clear_Server_Settings"/>
+            </StackLayout>            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

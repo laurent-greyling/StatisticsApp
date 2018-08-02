@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Nfield.Stats"
+             x:Class="Nfield.Stats.Views.MainPage"
+             Title="Nfield Statistics">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Settings" Clicked="Navigate_Settings" Priority="0"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout Spacing="10" Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="1"
+                   Source="nfieldmanager.png"/>
+            <Frame Grid.Row="2"
+                   VerticalOptions="CenterAndExpand">
+                <StackLayout Padding="5,5,5,5">
+                    <Label Text="User Name" FontSize="Small" />
+                    <Entry x:Name="UserName"/>
+                    <Label Text="Domain" FontSize="Small" />
+                    <Entry x:Name="Domain"/>
+                    <Label Text="Password" FontSize="Small" />
+                    <Entry x:Name="Password" IsPassword="True" />
+                </StackLayout>
+            </Frame>
+            <ActivityIndicator Grid.Row="3"
+                               x:Name="Loading"
+                               Color="#EA592E"
+                               VerticalOptions="FillAndExpand"
+                               HorizontalOptions="FillAndExpand"
+                               IsRunning="{Binding AccessToken.IsNotCompleted}"
+                               PropertyChanged="Navigate_On_Success"/>
+            <Image Grid.Row="3"
+                   x:Name="SignIn"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Source="signin.png"
+                   IsVisible="{Binding AccessToken.IsSuccessfullyCompleted}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Nfield_Signin"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+    </StackLayout>
+</ContentPage>
