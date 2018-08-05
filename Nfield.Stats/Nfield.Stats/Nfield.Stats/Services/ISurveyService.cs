@@ -11,5 +11,7 @@ namespace Nfield.Stats.Services
         IEnumerable<SurveyDetails> GetList();
 
         Task SaveAsync(string authToken);
+
+        Task<IEnumerable<SurveyDetails>> RetrieveAsync(string authToken);
     }
 }

@@ -1,4 +1,5 @@
 using Nfield.Stats.Entities;
+using Nfield.Stats.Models;
 using Nfield.Stats.Services;
 using Nfield.Stats.Utilities;
 using Xamarin.Forms;
@@ -15,8 +16,10 @@ namespace Nfield.Stats.Views
 
             DependencyService.Register<CreateSqliteTable>();
             DependencyService.Register<SqliteService<ServerEntity>>();
+            DependencyService.Register<SqliteService<SurveyDetails>>();
             DependencyService.Register<NfieldServer>();
             DependencyService.Register<RestCalls>();
+            DependencyService.Register<SurveyService>();
 
             MainPage = new NavigationPage(new MainPage());
 		}

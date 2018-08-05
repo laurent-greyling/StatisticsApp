@@ -29,21 +29,28 @@ namespace Nfield.Stats.Services
 
         public SurveyDetails Get()
         {
+            //to come soon
             throw new NotImplementedException();
         }
 
         public async Task SaveAsync(string authToken)
         {
             var currentSurveys = GetList();
-            var surveysList = await _rest.GetAsync($"{_server}/v1/Surveys", authToken);
+            var surveysList = await _rest.GetAsync($"{_server.Get().ServerDetails.NfieldServer}/v1/Surveys", authToken);
             var serverSurveys = JsonConvert.DeserializeObject<List<SurveyDetails>>(surveysList);
             var surveys = serverSurveys.Except(currentSurveys).ToList();
-            _sqlite.AddRange(surveys);
+            _sqlite.AddRange(surveys);            
         }
 
         public IEnumerable<SurveyDetails> GetList()
         {
             return _sqlite.Get();
+        }
+
+        public async Task<IEnumerable<SurveyDetails>> RetrieveAsync(string authToken)
+        {
+            await SaveAsync(authToken);
+            return GetList();
         }
     }
 }

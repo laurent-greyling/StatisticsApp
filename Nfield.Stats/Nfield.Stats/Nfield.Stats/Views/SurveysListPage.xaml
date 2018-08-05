@@ -1,12 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Nfield.Stats.Views.SurveysListPage">
+             x:Class="Nfield.Stats.Views.SurveysListPage"
+             Title="Surveys">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="5,5,5,5"
+                     Orientation="Vertical"
+                     HorizontalOptions="FillAndExpand">
+            <ActivityIndicator 
+                IsRunning="{Binding SurveysList.IsNotCompleted}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+            <Label Text="retrieving surveys" 
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="StartAndExpand"
+                   TextColor="#EA592E"/>
+            <ContentView IsVisible="{Binding SurveysList.IsSuccessfullyCompleted}">
+                <ListView ItemsSource="{Binding SurveysList.Result}"
+                          HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding SurveyName}"
+                                           ClassId="{Binding SurveyId}"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ContentView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

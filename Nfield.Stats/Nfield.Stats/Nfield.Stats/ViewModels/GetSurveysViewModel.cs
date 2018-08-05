@@ -12,9 +12,9 @@ namespace Nfield.Stats.ViewModels
 {
     public class GetSurveysViewModel : INotifyPropertyChanged
     {
-        public NotifyTaskCompletion<string> _surveysList { get; set; }
+        public NotifyTaskCompletion<IEnumerable<SurveyDetails>> _surveysList { get; set; }
 
-        public NotifyTaskCompletion<string> SurveysList
+        public NotifyTaskCompletion<IEnumerable<SurveyDetails>> SurveysList
         {
             get
             {
@@ -32,18 +32,10 @@ namespace Nfield.Stats.ViewModels
 
         public GetSurveysViewModel(string authToken)
         {
-            var restService = DependencyService
-            .Get<IRest>();
+            var surveys = DependencyService
+            .Get<ISurveyService>();
 
-            var serverService = DependencyService
-                .Get<INfieldServer>();
-
-            var nfieldServer = serverService
-                .Get()
-                .ServerDetails
-                .NfieldServer;
-
-            SurveysList = new NotifyTaskCompletion<string>(restService.GetAsync($"{nfieldServer}/v1/Surveys", authToken));
+            SurveysList = new NotifyTaskCompletion<IEnumerable<SurveyDetails>>(surveys.RetrieveAsync(authToken));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
