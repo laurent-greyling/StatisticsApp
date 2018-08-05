@@ -20,8 +20,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\INfieldServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISqliteService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ISurveyService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NfieldServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SqliteService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SurveyService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ClearServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GetServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GetSurveysViewModel.cs" />
