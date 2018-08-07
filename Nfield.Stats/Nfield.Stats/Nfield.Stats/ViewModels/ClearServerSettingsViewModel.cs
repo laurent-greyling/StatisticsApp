@@ -1,5 +1,4 @@
-﻿using Nfield.Stats.Entities;
-using Nfield.Stats.Services;
+﻿using Nfield.Stats.Services;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
@@ -10,7 +9,7 @@ namespace Nfield.Stats.ViewModels
     {
         public ClearServerSettingsViewModel()
         {
-            DependencyService.Get<ISqliteService<ServerEntity>>().DeleteAll();
+            DependencyService.Get<INfieldServer>().ClearAll();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

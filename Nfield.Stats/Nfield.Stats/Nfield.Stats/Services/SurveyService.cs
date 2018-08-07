@@ -36,7 +36,7 @@ namespace Nfield.Stats.Services
         public async Task SaveAsync(string authToken)
         {
             var currentSurveys = GetList();
-            var surveysList = await _rest.GetAsync($"{_server.Get().ServerDetails.NfieldServer}/v1/Surveys", authToken);
+            var surveysList = await _rest.GetAsync($"{_server.Get().NfieldServer}/v1/Surveys", authToken);
             var serverSurveys = JsonConvert.DeserializeObject<List<SurveyDetails>>(surveysList);
             var surveys = serverSurveys.Except(currentSurveys).ToList();
             _sqlite.AddRange(surveys);            

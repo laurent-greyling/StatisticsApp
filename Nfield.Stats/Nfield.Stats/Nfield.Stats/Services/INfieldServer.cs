@@ -1,13 +1,14 @@
-﻿using Nfield.Stats.ViewModels;
+﻿using Nfield.Stats.Entities;
+using Nfield.Stats.ViewModels;
 
 namespace Nfield.Stats.Services
 {
     public interface INfieldServer
     {
-        SetServerSettingsViewModel Set(string serverSelected);
+        void Set(string serverSelected);
 
-        GetServerSettingsViewModel Get();
+        ServerEntity Get();
 
-        void Clear();
+        void ClearAll();
     }
 }

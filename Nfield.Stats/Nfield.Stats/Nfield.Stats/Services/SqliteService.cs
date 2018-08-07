@@ -36,7 +36,6 @@ namespace Nfield.Stats.Services
 
         public IEnumerable<T> Get()
         {
-            var t = (from tbl in _table.Table<T>() select tbl).ToList();
             return (from tbl in _table.Table<T>() select tbl).ToList();
         }
 

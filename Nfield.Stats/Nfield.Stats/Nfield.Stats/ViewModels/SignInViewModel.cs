@@ -38,7 +38,6 @@ namespace Nfield.Stats.ViewModels
 
             var nfieldServer = serverService
                 .Get()
-                .ServerDetails
                 .NfieldServer;
 
             var signInData = JsonConvert.SerializeObject(signInModel);

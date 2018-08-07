@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Nfield.Stats.Services;
+using Nfield.Stats.ViewModels;
 
 namespace Nfield.Stats.Views
 {
@@ -19,7 +20,7 @@ namespace Nfield.Stats.Views
 
             InitializeComponent ();
             
-            BindingContext = _nfieldServer.Get();
+            BindingContext = new GetServerSettingsViewModel();
 
         }
 
@@ -33,7 +34,7 @@ namespace Nfield.Stats.Views
                 return;
             }
 
-            var serverSettings = _nfieldServer.Set(serverSelected);
+            var serverSettings = new SetServerSettingsViewModel(serverSelected);
 
             if (!serverSettings.IsSet)
             {
@@ -48,7 +49,7 @@ namespace Nfield.Stats.Views
         {
             Server.SelectedIndex = -1;
             TestServer.SelectedIndex = -1;
-            _nfieldServer.Clear();
+            new ClearServerSettingsViewModel();
             BindingContext = null;
         }
 
