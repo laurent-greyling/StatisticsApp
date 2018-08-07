@@ -7,14 +7,22 @@
         <StackLayout Padding="5,5,5,5"
                      Orientation="Vertical"
                      HorizontalOptions="FillAndExpand">
-            <ActivityIndicator 
-                IsRunning="{Binding SurveysList.IsNotCompleted}"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand"/>
-            <Label Text="retrieving surveys" 
+            <Grid IsVisible="{Binding SurveysList.IsNotCompleted}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <ActivityIndicator Grid.Row="0"
+                    IsRunning="{Binding SurveysList.IsNotCompleted}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Color="#EA592E"/>
+                <Label Grid.Row="1" 
+                   Text="retrieving surveys" 
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="StartAndExpand"
                    TextColor="#EA592E"/>
+            </Grid>
             <ContentView IsVisible="{Binding SurveysList.IsSuccessfullyCompleted}">
                 <ListView ItemsSource="{Binding SurveysList.Result}"
                           HasUnevenRows="True">
