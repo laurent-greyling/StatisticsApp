@@ -29,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\SqliteService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SurveyCountsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SurveysService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\SurveyType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ClearServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GetServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GetSurveysViewModel.cs" />

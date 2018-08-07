@@ -25,5 +25,8 @@
         public const string Yellow = "Yellow";
         public const string Purple = "Purple";
         public const string Rc = "RC";
+
+        public const string OnlineSurveyIcon = "ic_online_24dp.png";
+        public const string MobileSurveyIcon = "ic_android_black_24dp.png";
     }
 }

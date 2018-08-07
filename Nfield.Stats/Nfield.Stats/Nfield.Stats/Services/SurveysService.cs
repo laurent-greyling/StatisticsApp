@@ -64,6 +64,9 @@ namespace Nfield.Stats.Services
             {
                 var count = await _surveyCounts.SuccessfulCounts(authToken, survey.SurveyId);
                 survey.SuccessFulCount = count.ToString();
+                survey.Icon = survey.SurveyType == SurveyType.OnlineBasic.ToString()
+                    ? AppConst.OnlineSurveyIcon 
+                    : AppConst.MobileSurveyIcon;
             }
 
             return surveysList;
