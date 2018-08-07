@@ -33,7 +33,7 @@ namespace Nfield.Stats.ViewModels
         public GetSurveysViewModel(string authToken)
         {
             var surveys = DependencyService
-            .Get<ISurveyService>();
+            .Get<ISurveysService>();
 
             SurveysList = new NotifyTaskCompletion<IEnumerable<SurveyDetails>>(surveys.RetrieveAsync(authToken));
         }

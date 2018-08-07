@@ -23,21 +23,39 @@
                    VerticalOptions="StartAndExpand"
                    TextColor="#EA592E"/>
             </Grid>
-            <ContentView IsVisible="{Binding SurveysList.IsSuccessfullyCompleted}">
-                <ListView ItemsSource="{Binding SurveysList.Result}"
-                          HasUnevenRows="True">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout>
-                                    <Label Text="{Binding SurveyName}"
-                                           ClassId="{Binding SurveyId}"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </ContentView>
+            <ListView ItemsSource="{Binding SurveysList.Result}"
+                          HasUnevenRows="True"
+                          IsVisible="{Binding SurveysList.IsSuccessfullyCompleted}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="5,5,5,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
+                                               Source="{Binding Icon}"/>
+                                    <Label Grid.Column="1"
+                                               Text="{Binding SurveyName}"
+                                               ClassId="{Binding SurveyId}"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="StartAndExpand"
+                                               FontAttributes="Bold"/>
+                                    <Label Grid.Column="2"
+                                               Text="{Binding SuccessFulCount}"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               FontSize="Medium"/>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

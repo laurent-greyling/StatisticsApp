@@ -9,13 +9,14 @@ using Xamarin.Forms;
 
 namespace Nfield.Stats.Services
 {
-    public class SurveyService : ISurveyService
+    public class SurveysService : ISurveysService
     {
         IRest _rest;
         readonly INfieldServer _server;
         readonly ISqliteService<SurveyDetails> _sqlite;
+        readonly ISurveyCountsService _surveyCounts;
 
-        public SurveyService()
+        public SurveysService()
         {
             _rest = DependencyService
             .Get<IRest>();
@@ -25,6 +26,8 @@ namespace Nfield.Stats.Services
 
             _sqlite = DependencyService
                 .Get<ISqliteService<SurveyDetails>>();
+
+            _surveyCounts = DependencyService.Get<ISurveyCountsService>();
         }
 
         public SurveyDetails Get()
@@ -35,11 +38,16 @@ namespace Nfield.Stats.Services
 
         public async Task SaveAsync(string authToken)
         {
-            var currentSurveys = GetList();
+            var currentSurveys = GetList().Select(x=>x.SurveyId).ToList();
             var surveysList = await _rest.GetAsync($"{_server.Get().NfieldServer}/v1/Surveys", authToken);
             var serverSurveys = JsonConvert.DeserializeObject<List<SurveyDetails>>(surveysList);
-            var surveys = serverSurveys.Except(currentSurveys).ToList();
-            _sqlite.AddRange(surveys);            
+            var newSurveys = serverSurveys.Select(y => y.SurveyId).ToList();
+            var nonLocalSurveys = newSurveys.Except(currentSurveys).ToList();
+
+            foreach (var nonLocalSurvey in nonLocalSurveys)
+            {
+                _sqlite.Add(serverSurveys.FirstOrDefault(s => s.SurveyId == nonLocalSurvey));
+            }           
         }
 
         public IEnumerable<SurveyDetails> GetList()
@@ -50,7 +58,15 @@ namespace Nfield.Stats.Services
         public async Task<IEnumerable<SurveyDetails>> RetrieveAsync(string authToken)
         {
             await SaveAsync(authToken);
-            return GetList();
-        }
+            var surveysList = GetList();
+
+            foreach (var survey in surveysList)
+            {
+                var count = await _surveyCounts.SuccessfulCounts(authToken, survey.SurveyId);
+                survey.SuccessFulCount = count.ToString();
+            }
+
+            return surveysList;
+        } 
     }
 }

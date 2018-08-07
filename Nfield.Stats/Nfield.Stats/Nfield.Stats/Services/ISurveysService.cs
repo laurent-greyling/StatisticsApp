@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Nfield.Stats.Services
 {
-    interface ISurveyService
+    interface ISurveysService
     {
         SurveyDetails Get();
 
