@@ -3,10 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Nfield.Stats.Views.SurveysListPage"
              Title="Surveys">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_search_white_24dp.png" Clicked="Tapped_Search" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Padding="5,5,5,5"
                      Orientation="Vertical"
                      HorizontalOptions="FillAndExpand">
+            <SearchBar x:Name="SearchBar"
+                       Placeholder="Search"
+                       TextChanged="SearchBar_OnTextChanged"                       
+                       IsVisible="False"
+                       HeightRequest="50"/>
             <Grid IsVisible="{Binding SurveysList.IsNotCompleted}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
@@ -23,9 +31,10 @@
                    VerticalOptions="StartAndExpand"
                    TextColor="#EA592E"/>
             </Grid>
-            <ListView ItemsSource="{Binding SurveysList.Result}"
-                          HasUnevenRows="True"
-                          IsVisible="{Binding SurveysList.IsSuccessfullyCompleted}">
+            <ListView x:Name="SurveyList"
+                ItemsSource="{Binding SurveysList.Result}"
+                HasUnevenRows="True"
+                IsVisible="{Binding SurveysList.IsSuccessfullyCompleted}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
