@@ -15,7 +15,6 @@ namespace Nfield.Stats.Services
         readonly INfieldServer _server;
         readonly ISqliteService<SurveyDetails> _sqlite;
         readonly ISurveyCountsService _surveyCounts;
-
         public SurveysService()
         {
             _rest = DependencyService
@@ -68,6 +67,7 @@ namespace Nfield.Stats.Services
                 survey.Icon = survey.SurveyType == SurveyType.OnlineBasic.ToString()
                     ? AppConst.OnlineSurveyIcon 
                     : AppConst.MobileSurveyIcon;
+                survey.Image = survey.Image ?? AppConst.UnSelectFavourite;
             }
 
             return surveysList.OrderBy(o=>o.IsFavourite);
