@@ -48,5 +48,10 @@ namespace Nfield.Stats.Views
                                            .Where(n => n.SurveyName.ToLowerInvariant()
                                                    .Contains(e.NewTextValue.ToLowerInvariant()));
         }
+
+        public void Select_As_Favourite(object sender, TappedEventArgs e)
+        {
+            var selectedItem = sender as Image;
+        }
     }
 }

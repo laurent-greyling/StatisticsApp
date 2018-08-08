@@ -34,14 +34,14 @@
                                Color="#EA592E"
                                VerticalOptions="FillAndExpand"
                                HorizontalOptions="FillAndExpand"
-                               IsRunning="{Binding AccessToken.IsNotCompleted}"
-                               PropertyChanged="Navigate_On_Success"/>
+                               IsRunning="{Binding AccessToken.IsNotCompleted}"/>
             <Image Grid.Row="3"
                    x:Name="SignIn"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"
                    Source="signin.png"
-                   IsVisible="{Binding AccessToken.IsSuccessfullyCompleted}">
+                   IsVisible="{Binding AccessToken.IsSuccessfullyCompleted}"
+                   PropertyChanged="Navigate_On_Success">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Nfield_Signin"/>
                 </Image.GestureRecognizers>

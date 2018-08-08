@@ -59,6 +59,16 @@
                                                VerticalOptions="CenterAndExpand"
                                                HorizontalOptions="CenterAndExpand"
                                                FontSize="Medium"/>
+                                    <Image Grid.Column="3"
+                                           x:Name="SetFavourite"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="CenterAndExpand"
+                                           Source="{Binding Image}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Select_As_Favourite"
+                                                                  ClassId="{Binding SurveyId}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </Grid>
                             </StackLayout>
                         </ViewCell>

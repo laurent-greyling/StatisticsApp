@@ -52,7 +52,8 @@ namespace Nfield.Stats.Services
 
         public IEnumerable<SurveyDetails> GetList()
         {
-            return _sqlite.Get();
+            var surveys = _sqlite.Get();
+            return surveys.OrderBy(o => o.IsFavourite);
         }
 
         public async Task<IEnumerable<SurveyDetails>> RetrieveAsync(string authToken)
@@ -69,7 +70,7 @@ namespace Nfield.Stats.Services
                     : AppConst.MobileSurveyIcon;
             }
 
-            return surveysList;
+            return surveysList.OrderBy(o=>o.IsFavourite);
         } 
     }
 }
