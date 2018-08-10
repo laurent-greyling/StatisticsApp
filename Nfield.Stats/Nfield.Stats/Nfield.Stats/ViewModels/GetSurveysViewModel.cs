@@ -1,5 +1,4 @@
-﻿using Nfield.Stats.Models;
-using Nfield.Stats.Utilities;
+﻿using Nfield.Stats.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,14 +6,15 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
 using Nfield.Stats.Services;
+using Nfield.Stats.Entities;
 
 namespace Nfield.Stats.ViewModels
 {
     public class GetSurveysViewModel : INotifyPropertyChanged
     {
-        public NotifyTaskCompletion<IEnumerable<SurveyDetails>> _surveysList { get; set; }
+        public NotifyTaskCompletion<IEnumerable<SurveyDetailsEntity>> _surveysList { get; set; }
 
-        public NotifyTaskCompletion<IEnumerable<SurveyDetails>> SurveysList
+        public NotifyTaskCompletion<IEnumerable<SurveyDetailsEntity>> SurveysList
         {
             get
             {
@@ -35,7 +35,7 @@ namespace Nfield.Stats.ViewModels
             var surveys = DependencyService
             .Get<ISurveysService>();
 
-            SurveysList = new NotifyTaskCompletion<IEnumerable<SurveyDetails>>(surveys.RetrieveAsync(authToken));
+            _surveysList = new NotifyTaskCompletion<IEnumerable<SurveyDetailsEntity>>(surveys.RetrieveAsync(authToken));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

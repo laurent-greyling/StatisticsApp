@@ -41,7 +41,7 @@ namespace Nfield.Stats.ViewModels
                 .NfieldServer;
 
             var signInData = JsonConvert.SerializeObject(signInModel);
-            AccessToken = new NotifyTaskCompletion<string>(restService.PostAsync($"{nfieldServer}/v1/SignIn", signInData));
+            _accessToken = new NotifyTaskCompletion<string>(restService.PostAsync($"{nfieldServer}/v1/SignIn", signInData));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

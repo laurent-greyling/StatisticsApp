@@ -4,7 +4,9 @@ namespace Nfield.Stats.Entities
 {
     public class SurveyDetailsEntity
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+        [Unique]
         public string SurveyId { get; set; }
         public string SurveyName { get; set; }
         public string ClientName { get; set; }

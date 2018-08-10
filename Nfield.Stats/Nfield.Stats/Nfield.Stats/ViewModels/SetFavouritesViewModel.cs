@@ -1,4 +1,5 @@
-﻿using Nfield.Stats.Models;
+﻿using Nfield.Stats.Entities;
+using Nfield.Stats.Models;
 using Nfield.Stats.Services;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +10,9 @@ namespace Nfield.Stats.ViewModels
 {
     class SetFavouritesViewModel : INotifyPropertyChanged
     {
-        public IEnumerable<SurveyDetails> _surveysList { get; set; }
+        public IEnumerable<SurveyDetailsEntity> _surveysList { get; set; }
 
-        public IEnumerable<SurveyDetails> SurveysList
+        public IEnumerable<SurveyDetailsEntity> SurveysList
         {
             get
             {
@@ -37,7 +38,7 @@ namespace Nfield.Stats.ViewModels
 
             service.Set(surveyId);
 
-            SurveysList = surveyService.GetList();
+            _surveysList = surveyService.GetList();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

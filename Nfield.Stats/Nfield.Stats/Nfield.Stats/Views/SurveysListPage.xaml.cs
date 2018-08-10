@@ -52,6 +52,9 @@ namespace Nfield.Stats.Views
         public void Select_As_Favourite(object sender, TappedEventArgs e)
         {
             var selectedItem = sender as Image;
+            var surveyId = selectedItem.ClassId;
+            var setFavourites = new SetFavouritesViewModel(surveyId);
+            SurveyList.ItemsSource = setFavourites.SurveysList;
         }
     }
 }

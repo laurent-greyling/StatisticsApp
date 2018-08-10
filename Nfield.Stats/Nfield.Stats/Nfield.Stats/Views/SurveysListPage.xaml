@@ -41,10 +41,10 @@
                             <StackLayout Padding="5,5,5,5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="40"/>
+                                        <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="40"/>
-                                        <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
                                     <Image Grid.Column="0"
                                                Source="{Binding Icon}"/>
@@ -63,10 +63,10 @@
                                            x:Name="SetFavourite"
                                            VerticalOptions="CenterAndExpand"
                                            HorizontalOptions="CenterAndExpand"
-                                           Source="{Binding Image}">
+                                           Source="{Binding Image}"
+                                           ClassId="{Binding SurveyId}">
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="Select_As_Favourite"
-                                                                  ClassId="{Binding SurveyId}"/>
+                                            <TapGestureRecognizer Tapped="Select_As_Favourite"/>
                                         </Image.GestureRecognizers>
                                     </Image>
                                 </Grid>

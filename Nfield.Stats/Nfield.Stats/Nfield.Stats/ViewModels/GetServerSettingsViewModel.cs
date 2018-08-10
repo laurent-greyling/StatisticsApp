@@ -34,7 +34,7 @@ namespace Nfield.Stats.ViewModels
 
             var entity = service.Get();
 
-            ServerDetails = entity ?? new ServerEntity();
+            _serverDetails = entity ?? new ServerEntity();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

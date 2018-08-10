@@ -1,4 +1,5 @@
-﻿using Nfield.Stats.Models;
+﻿using Nfield.Stats.Entities;
+using Nfield.Stats.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,12 +7,12 @@ namespace Nfield.Stats.Services
 {
     interface ISurveysService
     {
-        SurveyDetails Get();
+        SurveyDetailsEntity Get();
 
-        IEnumerable<SurveyDetails> GetList();
+        IEnumerable<SurveyDetailsEntity> GetList();
 
         Task SaveAsync(string authToken);
 
-        Task<IEnumerable<SurveyDetails>> RetrieveAsync(string authToken);
+        Task<IEnumerable<SurveyDetailsEntity>> RetrieveAsync(string authToken);
     }
 }

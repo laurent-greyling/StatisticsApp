@@ -1,4 +1,5 @@
-﻿using Nfield.Stats.Models;
+﻿using Nfield.Stats.Entities;
+using Nfield.Stats.Models;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -6,12 +7,12 @@ namespace Nfield.Stats.Services
 {
     public class SetFavourites : ISetFavourites
     {
-        readonly ISqliteService<SurveyDetails> _sqlite;
+        readonly ISqliteService<SurveyDetailsEntity> _sqlite;
 
         public SetFavourites()
         {
             _sqlite = DependencyService
-                .Get<ISqliteService<SurveyDetails>>();
+                .Get<ISqliteService<SurveyDetailsEntity>>();
         }
 
         public void Set(string surveyId)

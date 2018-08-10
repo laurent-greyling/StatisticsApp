@@ -28,7 +28,7 @@
 
         public const string OnlineSurveyIcon = "ic_online_24dp.png";
         public const string MobileSurveyIcon = "ic_android_black_24dp.png";
-        public const string SelectFavourite = "selected.png";
+        public const string SelectFavourite = "select.png";
         public const string UnSelectFavourite = "unselect.png";
     }
 }

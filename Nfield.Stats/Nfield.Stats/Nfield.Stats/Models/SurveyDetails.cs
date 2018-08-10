@@ -2,6 +2,7 @@
 {
     public class SurveyDetails
     {
+        public int Id { get; set; }
         public string SurveyId { get; set; }
         public string SurveyName { get; set; }
         public string ClientName { get; set; }

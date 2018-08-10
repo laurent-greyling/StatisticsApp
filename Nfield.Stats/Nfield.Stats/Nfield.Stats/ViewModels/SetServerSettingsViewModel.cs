@@ -34,7 +34,7 @@ namespace Nfield.Stats.ViewModels
             service.Set(server);
             var entity = service.Get();
 
-            IsSet = entity != null;
+            _isSet = entity != null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
