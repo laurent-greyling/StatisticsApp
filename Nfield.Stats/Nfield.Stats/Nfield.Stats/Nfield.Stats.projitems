@@ -14,14 +14,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Entities\ServerEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\SurveyDetailsEntity.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\AuthorizationModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\NfieldErrorCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\QuotaAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\QuotaLevel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyCountsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\SurveyDetails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\INfieldServer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ISetFavourites.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ISqliteService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ISurveyCountsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ISurveysService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NfieldServer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SetFavourites.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\SqliteService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SurveyCountsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SurveysService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\SurveyType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ClearServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GetServerSettingsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GetSurveysViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SetFavouritesViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SetServerSettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SignInViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\App.xaml.cs">

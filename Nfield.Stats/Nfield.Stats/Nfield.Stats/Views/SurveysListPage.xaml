@@ -1,12 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Nfield.Stats.Views.SurveysListPage">
+             x:Class="Nfield.Stats.Views.SurveysListPage"
+             Title="Surveys">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_search_white_24dp.png" Clicked="Tapped_Search" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="5,5,5,5"
+                     Orientation="Vertical"
+                     HorizontalOptions="FillAndExpand">
+            <SearchBar x:Name="SearchBar"
+                       Placeholder="Search"
+                       TextChanged="SearchBar_OnTextChanged"                       
+                       IsVisible="False"
+                       HeightRequest="50"/>
+            <Grid IsVisible="{Binding SurveysList.IsNotCompleted}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <ActivityIndicator Grid.Row="0"
+                    IsRunning="{Binding SurveysList.IsNotCompleted}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Color="#EA592E"/>
+                <Label Grid.Row="1" 
+                   Text="retrieving surveys" 
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="StartAndExpand"
+                   TextColor="#EA592E"/>
+            </Grid>
+            <ListView x:Name="SurveyList"
+                ItemsSource="{Binding SurveysList.Result}"
+                HasUnevenRows="True"
+                IsVisible="{Binding SurveysList.IsSuccessfullyCompleted}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="5,5,5,5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="40"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.Column="0"
+                                               Source="{Binding Icon}"/>
+                                    <Label Grid.Column="1"
+                                               Text="{Binding SurveyName}"
+                                               ClassId="{Binding SurveyId}"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="StartAndExpand"
+                                               FontAttributes="Bold"/>
+                                    <Label Grid.Column="2"
+                                               Text="{Binding SuccessFulCount}"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="CenterAndExpand"
+                                               FontSize="Medium"/>
+                                    <Image Grid.Column="3"
+                                           x:Name="SetFavourite"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="CenterAndExpand"
+                                           Source="{Binding Image}"
+                                           ClassId="{Binding SurveyId}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Select_As_Favourite"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

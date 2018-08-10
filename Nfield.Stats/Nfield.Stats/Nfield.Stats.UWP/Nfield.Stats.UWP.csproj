@@ -133,6 +133,9 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="ic_android_black_24dp.png" />
+    <Content Include="ic_online_24dp.png" />
+    <Content Include="ic_search_white_24dp.png" />
     <Content Include="nfieldmanager.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Resources\barchart.png" />
@@ -150,7 +153,9 @@
     <Content Include="Resources\Splash2480.png" />
     <Content Include="Resources\Splash620.png" />
     <Content Include="Resources\Splash775.png" />
+    <Content Include="select.png" />
     <Content Include="signin.png" />
+    <Content Include="unselect.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

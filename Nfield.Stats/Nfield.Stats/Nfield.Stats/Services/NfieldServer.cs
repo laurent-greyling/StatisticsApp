@@ -2,22 +2,30 @@
 using Nfield.Stats.Models;
 using Nfield.Stats.ViewModels;
 using System;
+using System.Linq;
+using Xamarin.Forms;
 
 namespace Nfield.Stats.Services
 {
     public class NfieldServer : INfieldServer
     {
-        public void Clear()
+        readonly ISqliteService<ServerEntity> _sqliteService;
+        public NfieldServer()
         {
-            new ClearServerSettingsViewModel();
+            _sqliteService = DependencyService.Get<ISqliteService<ServerEntity>>();
         }
 
-        public GetServerSettingsViewModel Get()
+        public void ClearAll()
         {
-            return new GetServerSettingsViewModel();
+            _sqliteService.DeleteAll();
         }
 
-        public SetServerSettingsViewModel Set(string serverSelected)
+        public ServerEntity Get()
+        {
+            return _sqliteService.Get().FirstOrDefault();
+        }
+
+        public void Set(string serverSelected)
         {
             var server = new ServerEntity();
             switch (serverSelected)
@@ -70,7 +78,16 @@ namespace Nfield.Stats.Services
                     break;
             }
 
-            return new SetServerSettingsViewModel(server);
+            var exists = Get();
+
+            if (exists == null)
+            {
+                _sqliteService.Add(server);
+            }
+            else
+            {
+                _sqliteService.Update(server);
+            }
         }
     }
 }

@@ -2,7 +2,6 @@
 using Nfield.Stats.Entities;
 using Nfield.Stats.Services;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -31,11 +30,11 @@ namespace Nfield.Stats.ViewModels
         public GetServerSettingsViewModel()
         {
             var service = DependencyService
-                .Get<ISqliteService<ServerEntity>>();
+                .Get<INfieldServer>();
 
-            var entity = service.Get().FirstOrDefault();
+            var entity = service.Get();
 
-            ServerDetails = entity ?? new ServerEntity();
+            _serverDetails = entity ?? new ServerEntity();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

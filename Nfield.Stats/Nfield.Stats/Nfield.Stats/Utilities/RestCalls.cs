@@ -14,10 +14,12 @@ namespace Nfield.Stats.Utilities
         {
             _httpClient = new HttpClient();
         }
-        public async Task GetAsync(string request, string authToken)
+        public async Task<string> GetAsync(string request, string authToken)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authToken);
-            await _httpClient.GetAsync(request).ConfigureAwait(false);
+            var response = await _httpClient.GetAsync(request).ConfigureAwait(false);
+
+            return await response.Content.ReadAsStringAsync().ConfigureAwait(false);
         }
 
         public async Task<string> PostAsync(string request, string serialisedData)

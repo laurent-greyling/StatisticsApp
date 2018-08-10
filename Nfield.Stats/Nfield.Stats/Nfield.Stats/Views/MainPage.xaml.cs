@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Nfield.Stats.Models;
-using Nfield.Stats.Utilities;
 using Nfield.Stats.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -46,6 +45,12 @@ namespace Nfield.Stats.Views
             {
                 if (Auth == null || Auth.AccessToken.IsNotCompleted)
                 {
+                    return;
+                }
+
+                if (Auth.AccessToken.IsFaulted)
+                {
+                    await DisplayAlert("Error", "Oeps, something went wrong, please try again later", "Ok");
                     return;
                 }
 
